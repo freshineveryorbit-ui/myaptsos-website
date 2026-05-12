@@ -1,2470 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyAptsOS — Smart Property Management OS for Indian Apartment Complexes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #1a1a1a;
-      background: #faf7f2;
-      overflow-x: hidden;
-    }
-    h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; }
-    ul { list-style: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyOS Group | Operating Systems for Life, Communities & Governance</title>
+<meta name="description" content="MyOS Group builds operating systems for India's communities — MyAptsOS for societies, MyCivicOS for ward governance, MyLifeOS for personal growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & ROOT ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#f5efe4;
+  --paper:rgba(255,255,255,0.76);
+  --paper-strong:#fffdf8;
+  --ink:#15201a;
+  --muted:#607065;
+  --line:rgba(21,32,26,0.12);
+  --g9:#0f3020;--g7:#1f5c3a;--g5:#2f8a57;--g3:#52B788;
+  --gold:#e2a53a;--gold-s:#f4dfb3;
+  --civic:#1761c8;--civic-l:#4a8ee8;
+  --life:#9157d8;--life-l:#b47ff0;
+  --saffron:#E8821A;
+  --shadow:0 24px 60px rgba(15,32,20,0.12);
+  --r-xl:32px;--r-lg:24px;--r-md:18px;
+  --max:1220px;
+}
+body{font-family:'Manrope',sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(226,165,58,.16),transparent 28%),radial-gradient(circle at top right,rgba(23,97,200,.08),transparent 20%),linear-gradient(180deg,#f8f2e8 0%,#f2ecdf 100%);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
 
-    /* ============================================================
-       CSS VARIABLES
-    ============================================================ */
-    :root {
-      --green: #1a5c2a;
-      --green-light: #e8f5ec;
-      --green-mid: #2d7a40;
-      --orange: #e07b2a;
-      --orange-light: #fef3e8;
-      --cream: #faf7f2;
-      --white: #ffffff;
-      --text: #1a1a1a;
-      --text-muted: #5a6472;
-      --border: #e2ddd6;
-      --shadow: 0 4px 24px rgba(26,92,42,0.08);
-      --shadow-hover: 0 8px 40px rgba(26,92,42,0.16);
-      --radius: 12px;
-      --radius-lg: 20px;
-    }
+/* ── NAV ── */
+.site-nav{position:sticky;top:14px;z-index:20;width:min(var(--max),calc(100% - 28px));margin:14px auto 0;padding:14px 18px;border:1px solid rgba(255,255,255,.35);background:rgba(12,27,19,.82);backdrop-filter:blur(16px);border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.16);display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:42px;height:42px;border-radius:14px;background:radial-gradient(circle at 50% 50%,#14301d 0 18%,transparent 19%),linear-gradient(135deg,#f4c96f 0%,#e2a53a 55%,#bb7b13 100%);box-shadow:0 14px 28px rgba(226,165,58,.32);position:relative;flex:0 0 42px}
+.brand-mark::before,.brand-mark::after{content:"";position:absolute;background:rgba(20,48,29,.85);border-radius:999px}
+.brand-mark::before{width:20px;height:2px;left:11px;top:20px}
+.brand-mark::after{width:2px;height:20px;left:20px;top:11px}
+.brand-copy strong{display:block;color:#fff7e6;font-size:1rem;letter-spacing:-.02em}
+.brand-copy span{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.54)}
+.nav-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{font-size:.92rem;color:rgba(255,255,255,.78);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#efbf62,#e2a53a);color:#15311f;font-weight:700;font-size:.9rem;transition:opacity .2s}
+.nav-cta:hover{opacity:.88}
+.nav-ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(10,20,14,.97);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:#fff;font-size:1.8rem;font-family:'Fraunces',serif;transition:color .2s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:20px;right:24px;background:none;border:none;color:rgba(255,255,255,.6);font-size:2rem;cursor:pointer}
 
-    /* ============================================================
-       SCROLL FADE-IN ANIMATION (CSS only)
-    ============================================================ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .fade-in-delay-1 { transition-delay: 0.1s; }
-    .fade-in-delay-2 { transition-delay: 0.2s; }
-    .fade-in-delay-3 { transition-delay: 0.3s; }
-    .fade-in-delay-4 { transition-delay: 0.4s; }
+/* ── HERO ── */
+.hero{width:min(var(--max),calc(100% - 28px));margin:24px auto 0;padding:50px 44px;border-radius:38px;background:radial-gradient(circle at 15% 18%,rgba(226,165,58,.17),transparent 24%),radial-gradient(circle at 85% 15%,rgba(23,97,200,.14),transparent 20%),linear-gradient(135deg,#0d2419 0%,#103824 45%,#163b68 100%);color:#f4efe4;box-shadow:0 28px 70px rgba(10,22,15,.22);overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;inset:auto 42px 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#f2c66d;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#f2c66d;box-shadow:0 0 0 6px rgba(242,198,109,.12)}
+h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,5.4rem);line-height:.98;letter-spacing:-.05em;margin-bottom:20px}
+.hero p.lead{max-width:560px;font-size:1.08rem;color:rgba(244,239,228,.78);margin-bottom:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:32px}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:999px;font-weight:700;font-size:.95rem;transition:all .25s}
+.btn-primary{background:linear-gradient(135deg,#f3c66a,#e2a53a);color:#173120;box-shadow:0 16px 30px rgba(226,165,58,.24)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 36px rgba(226,165,58,.32)}
+.btn-secondary{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#f6f0e4}
+.btn-secondary:hover{background:rgba(255,255,255,.1)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hero-stat{padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.hero-stat strong{display:block;font-size:1.55rem;color:#fff;margin-bottom:4px}
+.hero-stat span{color:rgba(255,255,255,.62);font-size:.9rem}
+.eco-panel{padding:24px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+.eco-panel h2{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:16px}
+.orbit{display:grid;gap:12px}
+.orbit-card{padding:16px 18px;border-radius:18px;background:rgba(7,14,12,.26);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .3s}
+.orbit-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);transform:translateX(4px)}
+.orbit-card small{display:inline-block;margin-bottom:6px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.orbit-card h3{font-size:1rem;margin-bottom:4px}
+.orbit-card p{color:rgba(244,239,228,.65);font-size:.88rem}
+.life small{color:#d2b4ff}.civic small{color:#87b7ff}.apts small{color:#f3cf88}
 
-    /* ============================================================
-       UTILITY
-    ============================================================ */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 90px 0; }
-    .section-sm { padding: 60px 0; }
-    .section-heading {
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 800;
-      color: var(--green);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: clamp(15px, 2vw, 18px);
-      color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 640px;
-    }
-    .section-header { margin-bottom: 56px; }
-    .section-header.center { text-align: center; }
-    .section-header.center .section-sub { margin: 0 auto; }
-    .accent { color: var(--orange); }
-    .badge {
-      display: inline-block;
-      background: var(--orange-light);
-      color: var(--orange);
-      border: 1px solid #f5c490;
-      border-radius: 50px;
-      padding: 6px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 18px;
-      letter-spacing: 0.3px;
-    }
-    .tag-green {
-      background: var(--green-light);
-      color: var(--green);
-      border-color: #a8d5b5;
-    }
+/* ── SHELL ── */
+.shell{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+section{padding:30px 0 0}
+.section-card{width:min(var(--max),calc(100% - 28px));margin:0 auto;padding:36px;background:var(--paper);border:1px solid rgba(255,255,255,.34);border-radius:30px;backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.section-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:28px}
+.section-kicker{color:var(--g7);font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.03;letter-spacing:-.04em;max-width:780px}
+.section-sub{max-width:640px;color:var(--muted);font-size:1rem;margin-top:8px}
 
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      border: 2px solid transparent;
-      text-decoration: none;
-    }
-    .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-      border-color: var(--orange);
-    }
-    .btn-primary:hover {
-      background: #c96b1e;
-      border-color: #c96b1e;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(224,123,42,0.35);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--green);
-      border-color: var(--green);
-    }
-    .btn-outline:hover {
-      background: var(--green);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-    .btn-outline-white {
-      background: transparent;
-      color: var(--white);
-      border-color: rgba(255,255,255,0.6);
-    }
-    .btn-outline-white:hover {
-      background: var(--white);
-      color: var(--green);
-    }
-    .btn-lg { padding: 17px 36px; font-size: 16px; }
-    .btn-sm { padding: 10px 20px; font-size: 14px; }
+/* ── PRODUCT CARDS ── */
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.product-card{position:relative;min-height:560px;padding:26px;border-radius:28px;overflow:hidden;color:#fcf9f3;box-shadow:0 22px 48px rgba(0,0,0,.14);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .35s,box-shadow .35s}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 36px 64px rgba(0,0,0,.22)}
+.product-card::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.22));pointer-events:none}
+.product-card>*{position:relative;z-index:1}
+.pc-life{background:radial-gradient(circle at top right,rgba(220,200,255,.18),transparent 25%),linear-gradient(165deg,#2b1948 0%,#56308d 50%,#7b54b9 100%)}
+.pc-civic{background:radial-gradient(circle at top left,rgba(255,194,110,.18),transparent 25%),linear-gradient(165deg,#071a31 0%,#12365d 52%,#1a60b8 100%)}
+.pc-apts{background:radial-gradient(circle at top right,rgba(242,201,110,.18),transparent 28%),linear-gradient(165deg,#10251a 0%,#1d5436 52%,#2f8a57 100%)}
+.pc-badge{display:inline-flex;margin-bottom:14px;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:800}
+.product-card h3{font-family:'Fraunces',serif;font-size:2rem;line-height:1.02;letter-spacing:-.04em;margin-bottom:10px}
+.product-card .tagline{color:rgba(255,255,255,.92);font-size:1rem;margin-bottom:14px}
+.product-card .desc{color:rgba(255,255,255,.7);font-size:.93rem;line-height:1.6}
+.pc-features{list-style:none;display:grid;gap:9px;margin-top:16px}
+.pc-features li{padding:11px 14px;border-radius:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.1);font-size:.88rem;display:flex;align-items:center;gap:10px}
+.pc-cta-row{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between}
+.pc-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:.88rem;transition:all .25s}
+.pc-cta-apts{background:linear-gradient(135deg,#f3c66a,#e2a53a);color:#173120}
+.pc-cta-civic{background:linear-gradient(135deg,#6fa8ff,#1761c8);color:#fff}
+.pc-cta-life{background:linear-gradient(135deg,#d2b4ff,#9157d8);color:#fff}
+.pc-cta:hover{transform:translateY(-2px);opacity:.9}
+.pc-expand-hint{font-size:.78rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px}
 
-    /* BG variants */
-    .bg-white { background: var(--white); }
-    .bg-cream { background: var(--cream); }
-    .bg-green-tint { background: #f0f8f2; }
-    .bg-dark-green { background: var(--green); }
+/* ── MODAL OVERLAY ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(8,16,12,.85);backdrop-filter:blur(18px);opacity:0;pointer-events:none;transition:opacity .4s;overflow-y:auto}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{width:min(1100px,calc(100% - 28px));margin:28px auto 60px;border-radius:32px;overflow:hidden;position:relative}
+.modal-close{position:fixed;top:20px;right:20px;z-index:300;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;backdrop-filter:blur(8px)}
+.modal-close:hover{background:rgba(255,255,255,.2)}
 
-    /* ============================================================
-       NAVBAR
-    ============================================================ */
-    #navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--green);
-    }
-    .nav-logo .logo-icon {
-      width: 38px;
-      height: 38px;
-      background: var(--green);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 18px;
-    }
-    .nav-logo span.os { color: var(--orange); }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .nav-links a {
-      font-size: 14.5px;
-      font-weight: 500;
-      color: #333;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--green); }
-    .nav-ctas {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 6px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      padding: 16px 24px 24px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      padding: 12px 0;
-      font-size: 15px;
-      font-weight: 500;
-      color: #333;
-      border-bottom: 1px solid var(--border);
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu .btn { margin-top: 8px; justify-content: center; }
+/* Modal Hero */
+.m-hero{padding:48px 44px 36px;color:#f4efe4;position:relative;overflow:hidden}
+.m-hero-apts{background:linear-gradient(135deg,#0a1f12 0%,#173a22 50%,#1f5235 100%)}
+.m-hero-civic{background:linear-gradient(135deg,#050f1e 0%,#0d2648 50%,#123670 100%)}
+.m-hero-life{background:linear-gradient(135deg,#160d28 0%,#301a5c 50%,#4e2890 100%)}
+.m-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.06),transparent 50%);pointer-events:none}
+.m-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;padding:7px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.m-eyebrow-apts{color:#f3cf88}.m-eyebrow-civic{color:#87b7ff}.m-eyebrow-life{color:#d2b4ff}
+.m-title{font-family:'Fraunces',serif;font-size:clamp(2.4rem,5vw,4rem);line-height:.97;letter-spacing:-.05em;margin-bottom:16px}
+.m-tagline{font-size:1.1rem;color:rgba(255,255,255,.78);max-width:680px;margin-bottom:28px;line-height:1.65}
+.m-hero-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.m-stat{padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.m-stat strong{display:block;font-size:1.3rem;color:#fff;margin-bottom:2px}
+.m-stat span{font-size:.8rem;color:rgba(255,255,255,.55)}
 
-    /* ============================================================
-       SECTION 2: HERO
-    ============================================================ */
-    #hero {
-      background: linear-gradient(135deg, #0d3318 0%, #1a5c2a 45%, #1f6e32 100%);
-      padding: 90px 0 80px;
-      overflow: hidden;
-      position: relative;
-    }
-    #hero::before {
-      content: '';
-      position: absolute;
-      top: -100px; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(224,123,42,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(224,123,42,0.15);
-      border: 1px solid rgba(224,123,42,0.3);
-      border-radius: 50px;
-      padding: 6px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #f5c48a;
-      margin-bottom: 24px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .hero-label i { color: var(--orange); }
-    .hero-headline {
-      font-size: clamp(30px, 4.5vw, 52px);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .hero-headline .line-accent { color: #f5b95c; }
-    .hero-sub {
-      font-size: clamp(15px, 1.8vw, 18px);
-      color: rgba(255,255,255,0.8);
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-    .persona-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 36px;
-    }
-    .pill {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 50px;
-      padding: 8px 18px;
-      font-size: 13.5px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.9);
-      transition: all 0.2s;
-    }
-    .pill:hover {
-      background: rgba(255,255,255,0.18);
-      border-color: rgba(255,255,255,0.45);
-    }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+/* Modal Body */
+.m-body{background:var(--paper-strong);padding:36px 44px}
+.m-section{margin-bottom:48px}
+.m-section:last-child{margin-bottom:0}
+.m-kicker{font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.m-kicker-apts{color:var(--g7)}.m-kicker-civic{color:var(--civic)}.m-kicker-life{color:var(--life)}
+.m-section h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.05;letter-spacing:-.04em;margin-bottom:14px}
+.m-section p{color:var(--muted);font-size:1rem;line-height:1.72;max-width:760px;margin-bottom:14px}
+.m-section p:last-child{margin-bottom:0}
 
-    /* Dashboard mockup */
-    .dashboard-mockup {
-      position: relative;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      backdrop-filter: blur(10px);
-    }
-    .dash-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .dash-dots { display: flex; gap: 6px; }
-    .dash-dots span {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
-    .dash-dots span:nth-child(1) { background: #ff5f57; }
-    .dash-dots span:nth-child(2) { background: #febc2e; }
-    .dash-dots span:nth-child(3) { background: #28c840; }
-    .dash-title { font-size: 13px; color: rgba(255,255,255,0.6); font-family: 'Inter',sans-serif; }
-    .dash-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-    .dash-stat-card {
-      background: rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .dash-stat-card .label {
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 4px;
-      font-family: 'Inter',sans-serif;
-    }
-    .dash-stat-card .value {
-      font-size: 22px;
-      font-weight: 700;
-      color: #f5b95c;
-      font-family: 'Poppins',sans-serif;
-    }
-    .dash-stat-card .sub {
-      font-size: 10px;
-      color: #7dcc94;
-      margin-top: 2px;
-    }
-    .dash-bar-section { margin-bottom: 14px; }
-    .dash-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 5px;
-    }
-    .dash-bar {
-      height: 7px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .dash-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--orange), #f5c26e);
-      animation: barGrow 2s ease-out forwards;
-      width: 0;
-    }
-    @keyframes barGrow {
-      to { width: var(--w); }
-    }
-    .dash-notices {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .dash-notice-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      padding: 10px 12px;
-      border-left: 3px solid;
-    }
-    .dash-notice-item.green { border-left-color: #4ade80; }
-    .dash-notice-item.orange { border-left-color: var(--orange); }
-    .dash-notice-item.blue { border-left-color: #60a5fa; }
-    .dash-notice-item i { font-size: 13px; color: rgba(255,255,255,0.6); }
-    .dash-notice-item span { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Inter',sans-serif; }
-    .dash-notice-item .time { margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.35); }
-    .dash-ping {
-      position: absolute;
-      top: 20px; right: 20px;
-      width: 10px; height: 10px;
-      background: #4ade80;
-      border-radius: 50%;
-    }
-    .dash-ping::after {
-      content: '';
-      position: absolute;
-      top: -4px; left: -4px;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: rgba(74,222,128,0.3);
-      animation: ping 1.5s ease-out infinite;
-    }
-    @keyframes ping {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
+/* Benefits grid */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:6px}
+.benefit-card{padding:22px;border-radius:22px;background:var(--bg);border:1px solid var(--line)}
+.benefit-icon{font-size:1.6rem;margin-bottom:10px}
+.benefit-card h4{font-size:.96rem;font-weight:700;margin-bottom:6px}
+.benefit-card p{font-size:.88rem;color:var(--muted);line-height:1.6;margin:0}
 
-    /* ============================================================
-       SECTION 3: THE PROBLEM
-    ============================================================ */
-    .problem-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-bottom: 64px;
-    }
-    .problem-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 28px;
-      border-left: 4px solid var(--orange);
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .problem-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
-    .problem-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--orange-light);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    .problem-card h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 6px;
-    }
-    .problem-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .before-after {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0;
-      align-items: stretch;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .ba-col {
-      padding: 36px 32px;
-    }
-    .ba-col.before {
-      background: #fff5f5;
-      border: 1px solid #f5c6c6;
-    }
-    .ba-col.after {
-      background: var(--green-light);
-      border: 1px solid #a8d5b5;
-    }
-    .ba-divider {
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
-      font-size: 22px;
-      color: var(--text-muted);
-      font-weight: 700;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .ba-col h3 {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .ba-col.before h3 { color: #c0392b; }
-    .ba-col.after h3 { color: var(--green); }
-    .ba-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-      color: var(--text-muted);
-    }
-    .ba-list li i {
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-    .ba-col.before .ba-list li i { color: #e74c3c; }
-    .ba-col.after .ba-list li i { color: var(--green); }
+/* Stakeholders */
+.stakeholders-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:6px}
+.stakeholder{padding:22px 24px;border-radius:22px;background:var(--paper-strong);border:1px solid var(--line);box-shadow:0 8px 24px rgba(15,32,20,.06)}
+.stakeholder-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.stakeholder-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.si-apts{background:linear-gradient(135deg,var(--gold-s),#f1cb7f)}.si-civic{background:linear-gradient(135deg,#d4e4ff,#a5c5ff)}.si-life{background:linear-gradient(135deg,#ead6ff,#cba8ff)}
+.stakeholder-name{font-weight:800;font-size:.96rem}
+.stakeholder-role{font-size:.78rem;color:var(--muted)}
+.stakeholder ul{list-style:none;display:grid;gap:8px}
+.stakeholder li{font-size:.88rem;color:var(--ink);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.stakeholder li::before{content:"✓";font-weight:800;flex-shrink:0;margin-top:1px}
+.li-apts::before{color:var(--g5)}.li-civic::before{color:var(--civic)}.li-life::before{color:var(--life)}
 
-    /* ============================================================
-       SECTION 4: THREE AUDIENCES TABS
-    ============================================================ */
-    .tab-controls {
-      display: flex;
-      gap: 0;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      width: fit-content;
-      margin: 0 auto 48px;
-    }
-    .tab-btn {
-      padding: 13px 28px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      background: var(--white);
-      color: var(--text-muted);
-      border: none;
-      transition: all 0.25s;
-      border-right: 2px solid var(--border);
-    }
-    .tab-btn:last-child { border-right: none; }
-    .tab-btn.active {
-      background: var(--green);
-      color: var(--white);
-    }
-    .tab-btn:hover:not(.active) {
-      background: var(--green-light);
-      color: var(--green);
-    }
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; }
-    .audience-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--green);
-    }
-    .audience-card.orange-top { border-top-color: var(--orange); }
-    .audience-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 40px;
-    }
-    .audience-tagline {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 800;
-      color: var(--green);
-      margin-bottom: 12px;
-    }
-    .audience-sub {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-    .feature-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14.5px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-    }
-    .feature-list li:last-child { border-bottom: none; }
-    .feature-list li i { color: var(--green); font-size: 15px; }
-    .features-grid-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .mini-card {
-      background: var(--green-light);
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-    .mini-card:hover { transform: translateY(-2px); }
-    .mini-card i {
-      font-size: 20px;
-      color: var(--green);
-      margin-bottom: 8px;
-    }
-    .mini-card span {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--green);
-    }
-    .mini-card.orange-card { background: var(--orange-light); }
-    .mini-card.orange-card i { color: var(--orange); }
-    .mini-card.orange-card span { color: #a05214; }
-    .pricing-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--orange), #f5a845);
-      color: white;
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Poppins',sans-serif;
-      margin-bottom: 24px;
-    }
+/* Features list */
+.features-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:6px}
+.feature-item{padding:20px 22px;border-radius:20px;background:var(--bg);border:1px solid var(--line);display:flex;gap:14px;align-items:flex-start}
+.feature-icon-wrap{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.fi-apts{background:linear-gradient(135deg,#d4f0e2,#a8dfc0)}.fi-civic{background:linear-gradient(135deg,#d4e4ff,#a5c5ff)}.fi-life{background:linear-gradient(135deg,#ead6ff,#cba8ff)}
+.feature-item h4{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.feature-item p{font-size:.84rem;color:var(--muted);line-height:1.55;margin:0}
 
-    /* ============================================================
-       SECTION 5: ECO PARTNER NETWORK
-    ============================================================ */
-    .eco-value-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 56px;
-    }
-    .eco-val-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 36px;
-      box-shadow: var(--shadow);
-    }
-    .eco-val-card.green-border { border-top: 4px solid var(--green); }
-    .eco-val-card.orange-border { border-top: 4px solid var(--orange); }
-    .eco-val-card h3 {
-      font-size: 19px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .eco-val-card.green-border h3 { color: var(--green); }
-    .eco-val-card.orange-border h3 { color: var(--orange); }
-    .eco-val-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14.5px;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-    .eco-val-list li:last-child { border-bottom: none; }
-    .eco-val-list li i { color: var(--green); margin-top: 2px; }
-    .eco-cat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-    .eco-cat-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 24px 16px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border-bottom: 3px solid transparent;
-      transition: all 0.25s;
-    }
-    .eco-cat-card:hover {
-      border-bottom-color: var(--orange);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-    .eco-cat-card .eco-icon {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-    .eco-cat-card h4 {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--green);
-    }
-    .eco-cta-banner {
-      background: linear-gradient(135deg, var(--green) 0%, #2d7a40 100%);
-      border-radius: var(--radius-lg);
-      padding: 48px 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .eco-cta-banner h3 {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .eco-cta-banner p {
-      color: rgba(255,255,255,0.75);
-      font-size: 15px;
-    }
+/* Life stages */
+.stages-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:6px}
+.stage-card{padding:18px 14px;border-radius:18px;background:var(--bg);border:1px solid var(--line);text-align:center}
+.stage-age{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--life);margin-bottom:6px}
+.stage-name{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:8px;line-height:1.2}
+.stage-goal{font-size:.78rem;color:var(--muted)}
 
-    /* ============================================================
-       SECTION 6: REGISTRATION FORM
-    ============================================================ */
-    .form-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      box-shadow: var(--shadow);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .form-group.full { grid-column: 1 / -1; }
-    label {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--text);
-      font-family: 'Poppins', sans-serif;
-    }
-    label .req { color: var(--orange); }
-    input, select, textarea {
-      padding: 12px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14.5px;
-      color: var(--text);
-      background: #fafafa;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(26,92,42,0.1);
-      background: var(--white);
-    }
-    textarea { resize: vertical; min-height: 100px; }
-    .form-submit { margin-top: 12px; width: 100%; justify-content: center; }
-    .success-msg {
-      display: none;
-      background: var(--green-light);
-      border: 1.5px solid #a8d5b5;
-      border-radius: 10px;
-      padding: 20px 24px;
-      font-size: 15px;
-      color: var(--green);
-      font-weight: 500;
-      line-height: 1.6;
-      margin-top: 20px;
-    }
-    .success-msg.show { display: block; }
-    .success-msg-orange {
-      background: var(--orange-light);
-      border-color: #f5c490;
-      color: #7a4010;
-    }
+/* WhatsApp flow */
+.wa-flow{background:#ece5dd;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:8px;max-width:420px}
+.wa-msg{padding:9px 13px;border-radius:10px;font-size:.88rem;line-height:1.5;max-width:80%}
+.wa-msg.in{background:#fff;border-radius:2px 10px 10px 10px;align-self:flex-start}
+.wa-msg.out{background:#d9fdd3;border-radius:10px 2px 10px 10px;align-self:flex-end}
+.wa-msg small{display:block;font-size:.68rem;color:rgba(0,0,0,.4);margin-top:3px;text-align:right}
+.wa-section{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-top:6px}
+.wa-steps{display:flex;flex-direction:column;gap:16px}
+.wa-step{display:flex;gap:14px;align-items:flex-start}
+.wa-step-num{width:32px;height:32px;border-radius:50%;background:var(--saffron);color:#fff;font-weight:800;font-size:.88rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wa-step h4{font-size:.92rem;font-weight:700;margin-bottom:3px}
+.wa-step p{font-size:.84rem;color:var(--muted);line-height:1.5;margin:0}
 
-    /* ============================================================
-       SECTION 7: HOW IT WORKS
-    ============================================================ */
-    .how-tabs {
-      display: flex;
-      gap: 0;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      width: fit-content;
-      margin: 0 auto 48px;
-    }
-    .how-tab-btn {
-      padding: 13px 32px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      background: var(--white);
-      color: var(--text-muted);
-      border: none;
-      border-right: 2px solid var(--border);
-      transition: all 0.25s;
-    }
-    .how-tab-btn:last-child { border-right: none; }
-    .how-tab-btn.active { background: var(--green); color: var(--white); }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-    .step-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    .step-card::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: -13px;
-      transform: translateY(-50%);
-      width: 0; height: 0;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-left: 14px solid var(--border);
-    }
-    .step-card:last-child::after { display: none; }
-    .step-num {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, var(--green), var(--green-mid));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 800;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      margin: 0 auto 16px;
-    }
-    .step-card h4 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 8px;
-    }
-    .step-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .how-pane { display: none; }
-    .how-pane.active { display: block; }
+/* CTA strip in modal */
+.m-cta-strip{padding:32px;border-radius:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:12px}
+.m-cta-apts{background:linear-gradient(135deg,#0f2c1d,#1d5436)}
+.m-cta-civic{background:linear-gradient(135deg,#071a31,#123670)}
+.m-cta-life{background:linear-gradient(135deg,#160d28,#301a5c)}
+.m-cta-strip h3{font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;letter-spacing:-.03em}
+.m-cta-strip p{font-size:.9rem;color:rgba(255,255,255,.65);margin-top:6px;max-width:480px}
+.m-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;font-size:.95rem;white-space:nowrap;transition:all .25s}
+.m-cta-btn-apts{background:linear-gradient(135deg,#f3c66a,#e2a53a);color:#173120}
+.m-cta-btn-civic{background:linear-gradient(135deg,#87b7ff,#1761c8);color:#fff}
+.m-cta-btn-life{background:linear-gradient(135deg,#d2b4ff,#9157d8);color:#fff}
+.m-cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.24)}
 
-    /* ============================================================
-       SECTION 8: WHY MYAPTSOS
-    ============================================================ */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      margin-bottom: 56px;
-    }
-    .compare-table thead tr { background: var(--green); color: white; }
-    .compare-table thead th {
-      padding: 18px 24px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      text-align: left;
-    }
-    .compare-table thead th:nth-child(2) {
-      background: var(--orange);
-    }
-    .compare-table tbody tr:nth-child(odd) { background: var(--white); }
-    .compare-table tbody tr:nth-child(even) { background: #f8fdf9; }
-    .compare-table tbody td {
-      padding: 16px 24px;
-      font-size: 14.5px;
-      border-bottom: 1px solid var(--border);
-    }
-    .compare-table tbody td:nth-child(1) { color: #888; }
-    .compare-table tbody td:nth-child(2) { color: var(--green); font-weight: 600; }
-    .compare-table tbody td:nth-child(3) {
-      color: var(--orange);
-      font-weight: 600;
-    }
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-    .stat-item {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--orange);
-    }
-    .stat-item .num {
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 900;
-      color: var(--green);
-      font-family: 'Poppins', sans-serif;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-item .label {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
+/* ── MISSION ── */
+.group-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.vision-panel,.build-panel{padding:28px;border-radius:26px;background:var(--paper-strong);border:1px solid var(--line)}
+.vision-panel h3,.build-panel h3{font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:14px;letter-spacing:-.03em}
+.principles{display:grid;gap:14px;margin-top:18px}
+.principle{padding:16px 18px;border-radius:18px;background:#faf5ea;border:1px solid rgba(21,32,26,.08)}
+.principle strong{display:block;margin-bottom:6px;font-size:.96rem}
+.principle p{font-size:.88rem;color:var(--muted);margin:0}
+.build-list{list-style:none;display:grid;gap:12px}
+.build-list li{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.build-list li:last-child{border-bottom:0}
+.build-list b{min-width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--gold-s),#f1cb7f);color:#7a4c00;display:inline-flex;align-items:center;justify-content:center;font-size:.84rem;flex-shrink:0}
+.build-list div h4{font-size:.94rem;font-weight:700;margin-bottom:3px}
+.build-list div p{font-size:.84rem;color:var(--muted);margin:0}
 
-    /* ============================================================
-       SECTION 9: TESTIMONIALS
-    ============================================================ */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    .testi-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow);
-      border-left: 4px solid var(--green);
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .testi-card:nth-child(2n) { border-left-color: var(--orange); }
-    .testi-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
-    .stars { color: #f5c518; font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
-    .testi-quote {
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .testi-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-    }
-    .testi-avatar.g1 { background: var(--green-light); color: var(--green); }
-    .testi-avatar.g2 { background: var(--orange-light); color: var(--orange); }
-    .testi-avatar.g3 { background: #e8eeff; color: #3b5bdb; }
-    .testi-avatar.g4 { background: #fce4ff; color: #9c27b0; }
-    .testi-name { font-size: 15px; font-weight: 700; color: var(--text); font-family: 'Poppins',sans-serif; }
-    .testi-role { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+/* ── ROADMAP ── */
+.timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tl-card{padding:24px;border-radius:24px;background:var(--paper-strong);border:1px solid var(--line);box-shadow:0 14px 28px rgba(12,22,15,.06)}
+.tl-card small{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}
+.tl-apts small{color:var(--g7)}.tl-civic small{color:var(--civic)}.tl-life small{color:var(--life)}
+.tl-card h3{font-family:'Fraunces',serif;font-size:1.4rem;margin-bottom:10px;letter-spacing:-.03em}
+.tl-card p{color:var(--muted);margin-bottom:14px;font-size:.93rem}
+.tl-card ul{list-style:none;display:grid;gap:9px}
+.tl-card li{padding-left:16px;position:relative;color:var(--ink);font-size:.9rem}
+.tl-card li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);position:absolute;left:0;top:9px}
 
-    /* ============================================================
-       SECTION 10: PRICING
-    ============================================================ */
-    .pricing-section-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 28px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--border);
-      font-family: 'Poppins', sans-serif;
-    }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-    .price-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px;
-      box-shadow: var(--shadow);
-      border: 2px solid transparent;
-      position: relative;
-      transition: all 0.3s;
-    }
-    .price-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-    .price-card.recommended {
-      border-color: var(--green);
-      transform: scale(1.03);
-    }
-    .price-card.recommended:hover { transform: scale(1.03) translateY(-4px); }
-    .rec-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--green);
-      color: white;
-      padding: 5px 20px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 700;
-      font-family: 'Poppins',sans-serif;
-      white-space: nowrap;
-    }
-    .price-plan {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .price-amount {
-      font-size: 38px;
-      font-weight: 900;
-      color: var(--green);
-      font-family: 'Poppins', sans-serif;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .price-amount span { font-size: 18px; font-weight: 600; }
-    .price-per { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
-    .price-units {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--orange);
-      margin-bottom: 20px;
-    }
-    .price-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 20px 0;
-    }
-    .price-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      padding: 7px 0;
-      color: var(--text-muted);
-    }
-    .price-features li i { color: var(--green); margin-top: 2px; font-size: 13px; }
-    .price-cta { margin-top: 24px; width: 100%; justify-content: center; }
-    .eco-pricing-banner {
-      background: linear-gradient(135deg, #1a1a2e 0%, var(--green) 100%);
-      border-radius: var(--radius-lg);
-      padding: 40px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-    .eco-pricing-banner h3 {
-      font-size: clamp(18px, 2.5vw, 26px);
-      font-weight: 800;
-      color: white;
-      margin-bottom: 10px;
-    }
-    .eco-pricing-incl {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .eco-incl-tag {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      padding: 5px 14px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.85);
-    }
-    .pricing-note {
-      text-align: center;
-      font-size: 14px;
-      color: var(--text-muted);
-      padding: 16px;
-      background: var(--green-light);
-      border-radius: 8px;
-    }
-    .pricing-note i { color: var(--green); margin-right: 6px; }
+/* ── CTA ── */
+.cta-card{width:min(var(--max),calc(100% - 28px));margin:30px auto 42px;padding:36px;border-radius:34px;background:radial-gradient(circle at 20% 20%,rgba(226,165,58,.14),transparent 24%),linear-gradient(135deg,#0f2c1d 0%,#143b28 48%,#173f6c 100%);color:#f7f0e4;box-shadow:0 24px 56px rgba(11,21,15,.2)}
+.cta-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}
+.cta-card h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.03;letter-spacing:-.04em;margin-bottom:14px}
+.cta-card p{color:rgba(247,240,228,.74);max-width:560px}
+.cta-box{padding:24px;border-radius:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)}
+.cta-box strong{display:block;margin-bottom:12px;font-size:1.05rem}
+.cta-list{list-style:none;display:grid;gap:10px;color:rgba(247,240,228,.82);font-size:.94rem}
+.cta-list li{display:flex;gap:10px}
+.cta-form{margin-top:16px;display:grid;gap:10px}
+.cta-form input{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-family:'Manrope',sans-serif;font-size:.9rem;outline:none}
+.cta-form input::placeholder{color:rgba(255,255,255,.4)}
+.cta-form input:focus{border-color:var(--gold)}
+.cta-form button{padding:13px;border-radius:12px;background:linear-gradient(135deg,#f3c66a,#e2a53a);color:#173120;font-family:'Manrope',sans-serif;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .25s}
+.cta-form button:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(226,165,58,.28)}
+.cta-success{display:none;padding:14px;border-radius:12px;background:rgba(82,183,136,.15);border:1px solid rgba(82,183,136,.3);color:#a8dfc0;font-size:.92rem;text-align:center}
 
-    /* ============================================================
-       SECTION 11: EARLY ACCESS
-    ============================================================ */
-    .early-access-section {
-      background: linear-gradient(135deg, #0d3318 0%, var(--green) 60%, #2d7a40 100%);
-      padding: 90px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .early-access-section::before {
-      content: '';
-      position: absolute;
-      bottom: -100px; left: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(224,123,42,0.15) 0%, transparent 70%);
-    }
-    .early-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .early-text h2 {
-      font-size: clamp(26px, 3.5vw, 40px);
-      font-weight: 900;
-      color: white;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .early-text p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .early-bullets li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14.5px;
-      color: rgba(255,255,255,0.85);
-      padding: 8px 0;
-    }
-    .early-bullets li i { color: #7dcc94; }
-    .early-form-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 40px 36px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    }
-    .early-form-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 6px;
-    }
-    .early-form-card p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-    .early-form-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .early-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
+/* ── FOOTER ── */
+footer{width:min(var(--max),calc(100% - 28px));margin:0 auto 30px;padding:12px 6px 32px;display:flex;justify-content:space-between;gap:16px;color:#667468;font-size:.92rem;flex-wrap:wrap}
+footer a{color:#667468;transition:color .2s}
+footer a:hover{color:var(--ink)}
 
-    /* ============================================================
-       SECTION 12: FOOTER
-    ============================================================ */
-    footer {
-      background: #0d1f13;
-      padding: 64px 0 0;
-    }
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 2fr 1.2fr 1.5fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 14px;
-    }
-    .footer-logo .logo-icon {
-      width: 36px; height: 36px;
-      background: var(--orange);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-    }
-    .footer-logo span.os { color: var(--orange); }
-    .footer-tagline {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-    .footer-socials {
-      display: flex;
-      gap: 12px;
-    }
-    .social-btn {
-      width: 38px; height: 38px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.7);
-      font-size: 16px;
-      transition: all 0.25s;
-    }
-    .social-btn:hover {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: white;
-      transform: translateY(-2px);
-    }
-    .footer-col h4 {
-      font-size: 15px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 18px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .footer-links li {
-      padding: 6px 0;
-    }
-    .footer-links a {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--orange); }
-    .footer-contact li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      padding: 8px 0;
-      line-height: 1.5;
-    }
-    .footer-contact li i {
-      color: var(--orange);
-      width: 16px;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-    .footer-contact a { color: rgba(255,255,255,0.65); }
-    .footer-contact a:hover { color: var(--orange); }
-    .footer-bottom {
-      padding: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .footer-bottom p {
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.35);
-    }
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:all .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-1{transition-delay:.1s}.reveal-2{transition-delay:.2s}.reveal-3{transition-delay:.3s}
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 1024px) {
-      .eco-cat-grid { grid-template-columns: repeat(3, 1fr); }
-      .mini-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .step-card::after { display: none; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .nav-links, .nav-ctas { display: none; }
-      .hamburger { display: flex; }
-      .hero-inner { grid-template-columns: 1fr; }
-      .dashboard-mockup { display: none; }
-      .problem-grid { grid-template-columns: 1fr; }
-      .before-after { grid-template-columns: 1fr; }
-      .ba-divider { padding: 16px; display: block; text-align: center; }
-      .audience-top { grid-template-columns: 1fr; gap: 24px; }
-      .audience-card { padding: 28px 20px; }
-      .tab-controls { width: 100%; }
-      .tab-btn { padding: 12px 16px; font-size: 13px; flex: 1; text-align: center; }
-      .eco-value-cols { grid-template-columns: 1fr; }
-      .eco-cat-grid { grid-template-columns: repeat(2, 1fr); }
-      .eco-cta-banner { flex-direction: column; padding: 32px 24px; text-align: center; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: auto; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .price-card.recommended { transform: none; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .eco-pricing-banner { flex-direction: column; padding: 28px 24px; text-align: center; }
-      .early-inner { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .compare-table { display: block; overflow-x: auto; }
-    }
-    @media (max-width: 480px) {
-      .hero-ctas { flex-direction: column; }
-      .hero-ctas .btn { width: 100%; justify-content: center; }
-      .section { padding: 60px 0; }
-      .eco-cat-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .how-tabs { width: 100%; }
-      .how-tab-btn { flex: 1; padding: 12px 14px; font-size: 13px; }
-      .early-row { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-grid,.cta-grid,.group-grid,.wa-section{grid-template-columns:1fr}
+  .product-grid{grid-template-columns:1fr}
+  .benefits-grid,.features-grid{grid-template-columns:1fr 1fr}
+  .stakeholders-grid{grid-template-columns:1fr}
+  .stages-grid{grid-template-columns:repeat(3,1fr)}
+  .timeline{grid-template-columns:1fr}
+  .hero{padding:36px 24px}
+  .m-hero,.m-body{padding:32px 24px}
+}
+@media(max-width:640px){
+  .nav-links,.nav-cta{display:none}
+  .nav-ham{display:flex}
+  .benefits-grid,.features-grid{grid-template-columns:1fr}
+  .stages-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .product-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<!-- ============================================================
-     SECTION 1: STICKY NAVBAR
-============================================================ -->
-<header id="navbar">
-  <div class="container">
-    <nav class="nav-inner">
-      <a href="#" class="nav-logo">
-        <div class="logo-icon"><i class="fas fa-building"></i></div>
-        MyApts<span class="os">OS</span>
-      </a>
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#eco-partners">Eco Partners</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-ctas">
-        <a href="#eco-register" class="btn btn-outline btn-sm">Register as Eco Partner</a>
-        <a href="#early-access" class="btn btn-primary btn-sm">Get Early Access</a>
-      </div>
-      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </div>
-    </nav>
+<!-- NAV -->
+<nav class="site-nav" id="navbar">
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <div class="brand-copy">
+      <strong>MyOS Group</strong>
+      <span>Operating Systems for India</span>
+    </div>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#features" onclick="closeMenu()">Features</a>
-    <a href="#eco-partners" onclick="closeMenu()">Eco Partners</a>
-    <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
-    <a href="#pricing" onclick="closeMenu()">Pricing</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-    <a href="#eco-register" class="btn btn-outline" onclick="closeMenu()">Register as Eco Partner</a>
-    <a href="#early-access" class="btn btn-primary" onclick="closeMenu()">Get Early Access</a>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#mission">Mission</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Get in Touch ↗</a>
   </div>
-</header>
+  <button class="nav-ham" id="navHam" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#products" onclick="closeMob()">Products</a>
+  <a href="#mission" onclick="closeMob()">Mission</a>
+  <a href="#roadmap" onclick="closeMob()">Roadmap</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
 
-<!-- ============================================================
-     SECTION 2: HERO
-============================================================ -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-label">
-          <i class="fas fa-rocket"></i>
-          Now Live in Hyderabad — Limited Early Access
-        </div>
-        <h1 class="hero-headline">
-          Your Entire Apartment<br />
-          Complex.<br />
-          <span class="line-accent">One Smart OS.</span>
-        </h1>
-        <p class="hero-sub">
-          Automate Society Operations, Connect Verified Service Partners & Give Residents a Smarter Life
-        </p>
-        <div class="persona-pills">
-          <span class="pill">🏢 For Societies</span>
-          <span class="pill">🤝 For Eco Partners</span>
-          <span class="pill">🙋 For Residents</span>
-        </div>
-        <div class="hero-ctas">
-          <a href="#early-access" class="btn btn-primary btn-lg">
-            <i class="fas fa-play-circle"></i> Request Free Trial
-          </a>
-          <a href="#eco-register" class="btn btn-outline-white btn-lg">
-            <i class="fas fa-handshake"></i> Register as Eco Partner
-          </a>
-        </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">🇮🇳 Built in Hyderabad · For India</div>
+      <h1>Operating Systems for India's Communities.</h1>
+      <p class="lead">From gated apartments to city wards to everyday life — MyOS Group builds the digital infrastructure that powers India's communities forward.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">Explore Platforms ↓</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
       </div>
-      <div class="hero-visual fade-in">
-        <div class="dashboard-mockup">
-          <div class="dash-ping"></div>
-          <div class="dash-topbar">
-            <div class="dash-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <span class="dash-title">MyAptsOS — Sunrise Residency Dashboard</span>
-          </div>
-          <div class="dash-stats">
-            <div class="dash-stat-card">
-              <div class="label">Total Units</div>
-              <div class="value">248</div>
-              <div class="sub">↑ 12 new this month</div>
-            </div>
-            <div class="dash-stat-card">
-              <div class="label">Open Tickets</div>
-              <div class="value">7</div>
-              <div class="sub">↓ 4 resolved today</div>
-            </div>
-            <div class="dash-stat-card">
-              <div class="label">Rent Collected</div>
-              <div class="value">94%</div>
-              <div class="sub">₹12.6L this month</div>
-            </div>
-            <div class="dash-stat-card">
-              <div class="label">Eco Partners</div>
-              <div class="value">18</div>
-              <div class="sub">All verified ✓</div>
-            </div>
-          </div>
-          <div class="dash-bar-section">
-            <div class="dash-bar-label"><span>Maintenance Fee Collection</span><span>94%</span></div>
-            <div class="dash-bar"><div class="dash-bar-fill" style="--w:94%"></div></div>
-          </div>
-          <div class="dash-bar-section">
-            <div class="dash-bar-label"><span>Complaints Resolved</span><span>87%</span></div>
-            <div class="dash-bar"><div class="dash-bar-fill" style="--w:87%"></div></div>
-          </div>
-          <div class="dash-notices">
-            <div class="dash-notice-item green">
-              <i class="fas fa-check-circle"></i>
-              <span>Plumbing issue — Tower B, resolved</span>
-              <span class="time">2m ago</span>
-            </div>
-            <div class="dash-notice-item orange">
-              <i class="fas fa-bell"></i>
-              <span>Society AGM — Dec 15, notice sent</span>
-              <span class="time">1h ago</span>
-            </div>
-            <div class="dash-notice-item blue">
-              <i class="fas fa-user-check"></i>
-              <span>Visitor — Ravi Kumar cleared at Gate 1</span>
-              <span class="time">3h ago</span>
-            </div>
-          </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>500+</strong><span>Flats on MyAptsOS</span></div>
+        <div class="hero-stat"><strong>3</strong><span>Live Platforms</span></div>
+        <div class="hero-stat"><strong>24hr</strong><span>Onboarding Time</span></div>
+      </div>
+    </div>
+    <div class="eco-panel">
+      <h2>Our Ecosystem</h2>
+      <div class="orbit">
+        <div class="orbit-card apts" onclick="openModal('apts')">
+          <small>MyAptsOS</small>
+          <h3>Apartment OS</h3>
+          <p>UPI payments, complaints, gate logs & vendor marketplace for RWA societies.</p>
+        </div>
+        <div class="orbit-card civic" onclick="openModal('civic')">
+          <small>MyCivicOS</small>
+          <h3>Civic Governance</h3>
+          <p>WhatsApp-native complaint management for ward councillors & citizens.</p>
+        </div>
+        <div class="orbit-card life" onclick="openModal('life')">
+          <small>MyLifeOS</small>
+          <h3>Personal OS</h3>
+          <p>Life management from education to retirement — one intelligent platform.</p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ============================================================
-     SECTION 3: THE PROBLEM
-============================================================ -->
-<section id="problem" class="section bg-cream">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge">The Problem We Solve</div>
-      <h2 class="section-heading">Still Managing on WhatsApp<br />&amp; Paper Registers?</h2>
-      <p class="section-sub">Most apartment complexes in India still rely on outdated, fragmented tools. It's time for a smarter way.</p>
-    </div>
-    <div class="problem-grid">
-      <div class="problem-card fade-in fade-in-delay-1">
-        <div class="problem-icon">📋</div>
-        <div>
-          <h4>Manual Registers &amp; Excel Chaos</h4>
-          <p>Maintenance records, visitor logs, and payment history scattered across paper registers and unlocked Excel sheets with no audit trail.</p>
-        </div>
-      </div>
-      <div class="problem-card fade-in fade-in-delay-2">
-        <div class="problem-icon">📱</div>
-        <div>
-          <h4>WhatsApp Flooded with Complaints</h4>
-          <p>Residents spam the committee group with issues. No tracking, no accountability, no resolution timeline — just noise.</p>
-        </div>
-      </div>
-      <div class="problem-card fade-in fade-in-delay-3">
-        <div class="problem-icon">🔧</div>
-        <div>
-          <h4>No Reliable Vendor Network</h4>
-          <p>Finding trusted plumbers, electricians or housekeeping staff is a headache. No verification, no ratings, no SLA.</p>
-        </div>
-      </div>
-      <div class="problem-card fade-in fade-in-delay-4">
-        <div class="problem-icon">💸</div>
-        <div>
-          <h4>Missed Rent &amp; Payment Follow-ups</h4>
-          <p>Manual reminders, bounced cheques, and no digital payment trail create cash-flow chaos every single month.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Before vs After -->
-    <div class="before-after fade-in">
-      <div class="ba-col before">
-        <h3><i class="fas fa-times-circle"></i> Before MyAptsOS</h3>
-        <ul class="ba-list">
-          <li><i class="fas fa-times"></i> Paper registers for visitors &amp; maintenance</li>
-          <li><i class="fas fa-times"></i> WhatsApp groups for all communication</li>
-          <li><i class="fas fa-times"></i> Cash &amp; cheque only payments</li>
-          <li><i class="fas fa-times"></i> No vendor background checks</li>
-          <li><i class="fas fa-times"></i> Complaints lost in group chats</li>
-          <li><i class="fas fa-times"></i> Excel sheets for accounts &amp; billing</li>
-          <li><i class="fas fa-times"></i> No data for society decisions</li>
-        </ul>
-      </div>
-      <div class="ba-divider">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-      <div class="ba-col after">
-        <h3><i class="fas fa-check-circle"></i> After MyAptsOS</h3>
-        <ul class="ba-list">
-          <li><i class="fas fa-check"></i> Digital visitor log with photo &amp; OTP</li>
-          <li><i class="fas fa-check"></i> Dedicated app for structured communication</li>
-          <li><i class="fas fa-check"></i> Online payment gateway with auto-reminders</li>
-          <li><i class="fas fa-check"></i> Verified &amp; rated Eco Partner network</li>
-          <li><i class="fas fa-check"></i> Ticketing system with closure tracking</li>
-          <li><i class="fas fa-check"></i> Automated accounting &amp; invoicing</li>
-          <li><i class="fas fa-check"></i> Real-time dashboards &amp; reports</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 4: THREE AUDIENCES TABS
-============================================================ -->
-<section id="features" class="section bg-white">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge tag-green">Built for Everyone</div>
-      <h2 class="section-heading">One Platform. <span class="accent">Three Powerful Experiences.</span></h2>
-      <p class="section-sub">Whether you manage a society, provide services, or live in a community — MyAptsOS works for you.</p>
-    </div>
-
-    <div class="tab-controls">
-      <button class="tab-btn active" onclick="switchTab('societies', this)">🏢 For Societies</button>
-      <button class="tab-btn" onclick="switchTab('vendors', this)">🤝 For Eco Partners</button>
-      <button class="tab-btn" onclick="switchTab('residents', this)">🙋 For Residents</button>
-    </div>
-
-    <!-- Tab 1: Societies -->
-    <div class="tab-pane active" id="tab-societies">
-      <div class="audience-card fade-in">
-        <div class="audience-top">
-          <div>
-            <h3 class="audience-tagline">Streamline Your Apartment Management</h3>
-            <p class="audience-sub">Automate Society Operations, Enhance Security &amp; Provide Resident Convenience</p>
-            <ul class="feature-list">
-              <li><i class="fas fa-check-circle"></i> Centralized Management — one dashboard for everything</li>
-              <li><i class="fas fa-check-circle"></i> Enhanced Security — digital visitor &amp; staff management</li>
-              <li><i class="fas fa-check-circle"></i> Instant Announcements — push notices to all residents</li>
-              <li><i class="fas fa-check-circle"></i> Convenient Payments — automated rent &amp; maintenance billing</li>
-              <li><i class="fas fa-check-circle"></i> Verified Service Personnel — only background-checked vendors</li>
-              <li><i class="fas fa-check-circle"></i> Resident Satisfaction — track NPS &amp; resolve issues fast</li>
-            </ul>
-          </div>
-          <div>
-            <p class="features-grid-label">Key Features</p>
-            <div class="mini-grid">
-              <div class="mini-card"><i class="fas fa-bullhorn"></i><span>Digital Notice Board</span></div>
-              <div class="mini-card"><i class="fas fa-user-shield"></i><span>Visitor Management</span></div>
-              <div class="mini-card"><i class="fas fa-ticket-alt"></i><span>Ticketing &amp; Requests</span></div>
-              <div class="mini-card"><i class="fas fa-credit-card"></i><span>Payment Gateway</span></div>
-              <div class="mini-card"><i class="fas fa-tools"></i><span>Vendor Management</span></div>
-              <div class="mini-card"><i class="fas fa-calendar-alt"></i><span>Community Events</span></div>
-            </div>
-            <div style="margin-top:28px">
-              <a href="#early-access" class="btn btn-primary">
-                <i class="fas fa-building"></i>
-                Register Your Society — Free 1 Month Trial
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab 2: Eco Partners -->
-    <div class="tab-pane" id="tab-vendors">
-      <div class="audience-card orange-top fade-in">
-        <div class="audience-top">
-          <div>
-            <h3 class="audience-tagline" style="color:var(--orange)">Turn Your Skills Into Daily Income</h3>
-            <p class="audience-sub">Get Paid Work from Nearby Apartments — No Middlemen, No Searching</p>
-            <ul class="feature-list">
-              <li><i class="fas fa-map-marker-alt" style="color:var(--orange)"></i> Local Jobs Only — requests from apartments near you</li>
-              <li><i class="fas fa-user-check" style="color:var(--orange)"></i> Verified Customers — all society-approved requests</li>
-              <li><i class="fas fa-redo-alt" style="color:var(--orange)"></i> Repeat Business — build a loyal client base</li>
-              <li><i class="fas fa-clock" style="color:var(--orange)"></i> Flexible Work — accept jobs on your schedule</li>
-              <li><i class="fas fa-ban" style="color:var(--orange)"></i> No Middlemen — earn full payment directly</li>
-              <li><i class="fas fa-star" style="color:var(--orange)"></i> Priority Visibility — top-rated partners get more jobs</li>
-            </ul>
-          </div>
-          <div>
-            <p class="features-grid-label">Who Can Join</p>
-            <div class="mini-grid">
-              <div class="mini-card orange-card"><i class="fas fa-bolt"></i><span>Electricians</span></div>
-              <div class="mini-card orange-card"><i class="fas fa-faucet"></i><span>Plumbers</span></div>
-              <div class="mini-card orange-card"><i class="fas fa-snowflake"></i><span>AC Technicians</span></div>
-              <div class="mini-card orange-card"><i class="fas fa-hammer"></i><span>Carpenters</span></div>
-              <div class="mini-card orange-card"><i class="fas fa-paint-roller"></i><span>Painters</span></div>
-              <div class="mini-card orange-card"><i class="fas fa-broom"></i><span>Cleaners</span></div>
-            </div>
-            <div style="margin-top:20px">
-              <div class="pricing-badge"><i class="fas fa-tag"></i> First Month FREE — then only ₹99/month</div>
-            </div>
-            <a href="#eco-register" class="btn btn-primary" style="background:var(--orange);border-color:var(--orange)">
-              <i class="fas fa-handshake"></i>
-              Register as Eco Partner — Start Free
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab 3: Residents -->
-    <div class="tab-pane" id="tab-residents">
-      <div class="audience-card fade-in" style="border-top-color:#3b82f6">
-        <div class="audience-top">
-          <div>
-            <h3 class="audience-tagline" style="color:#2563eb">Your Smart Lifestyle Starts Here</h3>
-            <p class="audience-sub">Vendor &amp; Service Partner Search Made Easy from Your Apartment App</p>
-            <ul class="feature-list">
-              <li><i class="fas fa-shield-alt" style="color:#2563eb"></i> Verified Professionals — background-checked partners only</li>
-              <li><i class="fas fa-mobile-alt" style="color:#2563eb"></i> Fast &amp; Easy Booking — track status in real-time</li>
-              <li><i class="fas fa-tag" style="color:#2563eb"></i> Clear Upfront Pricing — no bargaining, no surprises</li>
-              <li><i class="fas fa-star" style="color:#2563eb"></i> Community Ratings — hire based on neighbour reviews</li>
-              <li><i class="fas fa-bell" style="color:#2563eb"></i> Society Notices — stay informed, never miss an update</li>
-            </ul>
-          </div>
-          <div>
-            <p class="features-grid-label">Services You Can Find</p>
-            <div class="mini-grid" style="grid-template-columns:repeat(3,1fr)">
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-bolt" style="color:#2563eb"></i><span style="color:#1e40af">Electricians</span></div>
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-snowflake" style="color:#2563eb"></i><span style="color:#1e40af">AC Tech</span></div>
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-faucet" style="color:#2563eb"></i><span style="color:#1e40af">Plumbers</span></div>
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-broom" style="color:#2563eb"></i><span style="color:#1e40af">Cleaners</span></div>
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-car" style="color:#2563eb"></i><span style="color:#1e40af">Drivers</span></div>
-              <div class="mini-card" style="background:#eff6ff"><i class="fas fa-wrench" style="color:#2563eb"></i><span style="color:#1e40af">Handyman</span></div>
-            </div>
-            <p style="font-size:13px;color:var(--text-muted);margin-top:12px">And 99+ more services available in your app</p>
-            <div style="margin-top:20px">
-              <a href="#early-access" class="btn btn-outline" style="border-color:#2563eb;color:#2563eb">
-                <i class="fas fa-search"></i>
-                Find Services in Your Apartment App
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 5: ECO PARTNER NETWORK
-============================================================ -->
-<section id="eco-partners" class="section bg-cream">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge">Eco Partner Network</div>
-      <h2 class="section-heading">A Verified Service Ecosystem<br /><span class="accent">Built Into Your Property OS</span></h2>
-      <p class="section-sub">Apartments get reliable vendors. Vendors get steady income. Everyone wins.</p>
-    </div>
-
-    <div class="eco-value-cols">
-      <div class="eco-val-card green-border fade-in fade-in-delay-1">
-        <h3><i class="fas fa-building"></i> For Apartments</h3>
-        <ul class="eco-val-list">
-          <li><i class="fas fa-check-circle"></i> Verified vendors — background-checked &amp; society-approved</li>
-          <li><i class="fas fa-check-circle"></i> Instant complaint assignment to the right service partner</li>
-          <li><i class="fas fa-check-circle"></i> Complaint-to-closure tracking — never lose a ticket</li>
-          <li><i class="fas fa-check-circle"></i> No middlemen — connect directly with service providers</li>
-          <li><i class="fas fa-check-circle"></i> Rated &amp; reviewed by your community members</li>
-          <li><i class="fas fa-check-circle"></i> Emergency contacts at your fingertips 24/7</li>
-        </ul>
-      </div>
-      <div class="eco-val-card orange-border fade-in fade-in-delay-2">
-        <h3><i class="fas fa-handshake"></i> For Vendors / Eco Partners</h3>
-        <ul class="eco-val-list">
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> Get job leads from verified apartment communities</li>
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> Build your digital reputation with ratings</li>
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> Earn star ratings that attract more business</li>
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> Grow your client base without advertising costs</li>
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> WhatsApp job alerts — never miss an opportunity</li>
-          <li><i class="fas fa-check-circle" style="color:var(--orange)"></i> First month completely FREE — no risk to try</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="eco-cat-grid">
-      <div class="eco-cat-card fade-in fade-in-delay-1">
-        <div class="eco-icon">🔧</div>
-        <h4>Plumbers &amp; Electricians</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-1">
-        <div class="eco-icon">❄️</div>
-        <h4>AC &amp; Appliance Repair</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-2">
-        <div class="eco-icon">🧹</div>
-        <h4>Cleaning &amp; Housekeeping</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-2">
-        <div class="eco-icon">🛡️</div>
-        <h4>Security Agencies</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-3">
-        <div class="eco-icon">🌐</div>
-        <h4>Internet &amp; DTH Providers</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-3">
-        <div class="eco-icon">🚛</div>
-        <h4>Packers &amp; Movers</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-4">
-        <div class="eco-icon">🌿</div>
-        <h4>Organic &amp; Wellness Suppliers</h4>
-      </div>
-      <div class="eco-cat-card fade-in fade-in-delay-4">
-        <div class="eco-icon">⚡</div>
-        <h4>Solar &amp; EV Partners</h4>
-      </div>
-    </div>
-
-    <div class="eco-cta-banner fade-in">
+<!-- PRODUCTS SECTION -->
+<section id="products">
+  <div class="section-card">
+    <div class="section-head">
       <div>
-        <h3>Join as an Eco Partner — <span style="color:#f5b95c">First Month FREE</span></h3>
-        <p>Start getting local job requests from verified apartment communities. Zero upfront cost.</p>
+        <div class="section-kicker">Our Platforms</div>
+        <h2 class="section-title">Three Operating Systems. One Ecosystem.</h2>
+        <p class="section-sub">Each platform solves a distinct community problem — click any card to see the full picture.</p>
       </div>
-      <a href="https://www.forms.gle/j6WE83DMEjDuBKN9" target="_blank" class="btn btn-primary btn-lg" style="white-space:nowrap">
-        Register Now &rarr;
-      </a>
+    </div>
+    <div class="product-grid">
+
+      <!-- MyAptsOS -->
+      <div class="product-card pc-apts reveal" onclick="openModal('apts')">
+        <div class="product-top">
+          <div class="pc-badge">🏢 MyAptsOS · Live</div>
+          <h3>Apartment Society OS</h3>
+          <p class="tagline">"Run Your Society. Not Just Manage It."</p>
+          <p class="desc">The complete operating system for Indian RWA-governed gated communities — payments, complaints, gate security, and a hyperlocal vendor marketplace.</p>
+          <ul class="pc-features">
+            <li>💰 UPI Maintenance Payments — no gateway</li>
+            <li>🚨 Complaint Management & Audit Trail</li>
+            <li>🚪 Gate & Visitor Log Tracking</li>
+            <li>🛠️ Hyperlocal Vendor Marketplace</li>
+          </ul>
+        </div>
+        <div class="pc-cta-row">
+          <span class="pc-cta pc-cta-apts">Explore MyAptsOS →</span>
+          <span class="pc-expand-hint">Click to see full details ↗</span>
+        </div>
+      </div>
+
+      <!-- MyCivicOS -->
+      <div class="product-card pc-civic reveal reveal-1" onclick="openModal('civic')">
+        <div class="product-top">
+          <div class="pc-badge">🏛️ MyCivicOS · Telangana</div>
+          <h3>Civic Governance OS</h3>
+          <p class="tagline">"Smart Wards. Empowered Citizens."</p>
+          <p class="desc">A civic governance platform for ward councillors and citizens across Telangana's ULBs — WhatsApp-native, QR-code onboarding, real-time dashboards.</p>
+          <ul class="pc-features">
+            <li>📲 WhatsApp Complaint Filing — no app needed</li>
+            <li>🔲 QR Code Ward Onboarding</li>
+            <li>📊 Ward Analytics & Health Dashboard</li>
+            <li>🔔 SLA Tracking & Escalation Alerts</li>
+          </ul>
+        </div>
+        <div class="pc-cta-row">
+          <span class="pc-cta pc-cta-civic">Explore MyCivicOS →</span>
+          <span class="pc-expand-hint">Click to see full details ↗</span>
+        </div>
+      </div>
+
+      <!-- MyLifeOS -->
+      <div class="product-card pc-life reveal reveal-2" onclick="openModal('life')">
+        <div class="product-top">
+          <div class="pc-badge">🌱 MyLifeOS · Coming Soon</div>
+          <h3>Personal Life OS</h3>
+          <p class="tagline">"Designed for Every Stage of Life."</p>
+          <p class="desc">An intelligent life management platform that adapts to your age, priorities, and life stage — from school to leadership, one structured ecosystem.</p>
+          <ul class="pc-features">
+            <li>📅 Life-Stage Personalized Guidance</li>
+            <li>💰 Finance, Health & Goal Tracking</li>
+            <li>👨‍👩‍👧 Family & Mentor Connectivity</li>
+            <li>🏪 Local Service Discovery</li>
+          </ul>
+        </div>
+        <div class="pc-cta-row">
+          <span class="pc-cta pc-cta-life">Explore MyLifeOS →</span>
+          <span class="pc-expand-hint">Click to see full details ↗</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     SECTION 6: ECO PARTNER REGISTRATION FORM
-============================================================ -->
-<section id="eco-register" class="section bg-white">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge">Join the Network</div>
-      <h2 class="section-heading">Register as an <span class="accent">Eco Partner</span></h2>
-      <p class="section-sub">Join the MyAptsOS verified vendor network and start getting local job requests from apartments near you.</p>
-    </div>
-
-    <div class="form-card fade-in">
-      <form id="ecoForm" onsubmit="submitEcoForm(event)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="eco-name">Full Name <span class="req">*</span></label>
-            <input type="text" id="eco-name" placeholder="Your full name" required />
-          </div>
-          <div class="form-group">
-            <label for="eco-business">Business / Service Name <span class="req">*</span></label>
-            <input type="text" id="eco-business" placeholder="e.g. Ravi Electricals" required />
-          </div>
-          <div class="form-group">
-            <label for="eco-category">Service Category <span class="req">*</span></label>
-            <select id="eco-category" required>
-              <option value="">Select a category</option>
-              <option>Electrician</option>
-              <option>Plumber</option>
-              <option>AC Technician</option>
-              <option>Carpenter</option>
-              <option>Painter</option>
-              <option>Cleaner</option>
-              <option>Driver</option>
-              <option>Appliance Repair</option>
-              <option>Security</option>
-              <option>Internet / DTH</option>
-              <option>Packers &amp; Movers</option>
-              <option>Organic / Wellness</option>
-              <option>Solar / EV</option>
-              <option>Handyman</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="eco-city">City / Area <span class="req">*</span></label>
-            <input type="text" id="eco-city" placeholder="e.g. Kondapur, Hyderabad" required />
-          </div>
-          <div class="form-group">
-            <label for="eco-phone">Contact Number <span class="req">*</span></label>
-            <input type="tel" id="eco-phone" placeholder="+91 98765 43210" required />
-          </div>
-          <div class="form-group">
-            <label for="eco-whatsapp">WhatsApp Number</label>
-            <input type="tel" id="eco-whatsapp" placeholder="Same as above or different" />
-          </div>
-          <div class="form-group full">
-            <label for="eco-desc">Brief Description of Services</label>
-            <textarea id="eco-desc" placeholder="Tell us about your services, experience, and the areas you serve..."></textarea>
-          </div>
-          <div class="form-group full">
-            <label for="eco-source">How did you hear about us?</label>
-            <select id="eco-source">
-              <option value="">Select an option</option>
-              <option>WhatsApp</option>
-              <option>Instagram</option>
-              <option>Friend / Referral</option>
-              <option>Apartment Notice</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg form-submit" style="margin-top:24px">
-          <i class="fas fa-handshake"></i> Register as Eco Partner — It's Free!
-        </button>
-      </form>
-      <div class="success-msg" id="ecoSuccess">
-        ✅ Thank you! We've received your registration. Our team will reach out on WhatsApp within 24 hours. First month is completely FREE — no risk!
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 7: HOW IT WORKS
-============================================================ -->
-<section id="how-it-works" class="section bg-green-tint">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge tag-green">Simple Process</div>
-      <h2 class="section-heading">Up &amp; Running in <span class="accent">4 Simple Steps</span></h2>
-      <p class="section-sub">Getting started with MyAptsOS takes minutes, not months.</p>
-    </div>
-
-    <div class="how-tabs">
-      <button class="how-tab-btn active" onclick="switchHow('societies', this)">For Societies</button>
-      <button class="how-tab-btn" onclick="switchHow('vendors', this)">For Eco Partners</button>
-    </div>
-
-    <div class="how-pane active" id="how-societies">
-      <div class="steps-grid">
-        <div class="step-card fade-in fade-in-delay-1">
-          <div class="step-num">1</div>
-          <h4>Register Your Society</h4>
-          <p>Fill in your society details, add your units and get your admin account set up in minutes.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-2">
-          <div class="step-num">2</div>
-          <h4>Customize &amp; Onboard Tenants</h4>
-          <p>Configure your features, invite residents via WhatsApp or SMS, and set up your vendor access.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-3">
-          <div class="step-num">3</div>
-          <h4>Automate Operations</h4>
-          <p>Enable payments, visitor management, ticketing, announcements — everything runs automatically.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-4">
-          <div class="step-num">4</div>
-          <h4>Monitor &amp; Manage</h4>
-          <p>Track everything from your dashboard. Resolve issues, collect payments, manage vendors.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="how-pane" id="how-vendors">
-      <div class="steps-grid">
-        <div class="step-card fade-in fade-in-delay-1">
-          <div class="step-num">1</div>
-          <h4>Register for Free</h4>
-          <p>Fill in your details, choose your service category, and submit your registration. No cost to start.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-2">
-          <div class="step-num">2</div>
-          <h4>Get Nearby Job Requests</h4>
-          <p>Receive WhatsApp alerts for job requests from verified apartment complexes in your area.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-3">
-          <div class="step-num">3</div>
-          <h4>Accept &amp; Complete Jobs</h4>
-          <p>Accept the request, visit the location, complete the job, and mark it done in the app.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-4">
-          <div class="step-num">4</div>
-          <h4>Earn &amp; Grow</h4>
-          <p>Collect your payment, earn ratings, build your reputation, and get more jobs every week.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 8: WHY MYAPTSOS
-============================================================ -->
-<section id="why" class="section bg-white">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge tag-green">Why Choose Us</div>
-      <h2 class="section-heading">Trusted, Secure &amp; <span class="accent">Built for India</span></h2>
-      <p class="section-sub">See how MyAptsOS compares to the traditional way of managing apartments.</p>
-    </div>
-
-    <div class="fade-in" style="overflow-x:auto">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th><i class="fas fa-times-circle" style="margin-right:8px"></i>Traditional</th>
-            <th><i class="fas fa-building" style="margin-right:8px"></i>MyAptsOS</th>
-            <th><i class="fas fa-star" style="margin-right:8px"></i>Benefit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Manual Processes</td><td>All-in-One Digital Platform</td><td>Save Time</td></tr>
-          <tr><td>Slow Delayed Action</td><td>Quick Automated Response</td><td>Act Fast</td></tr>
-          <tr><td>Multiple Apps &amp; Tools</td><td>Single App Does It All</td><td>Simplicity</td></tr>
-          <tr><td>Complex Setup / Costs</td><td>Simple &amp; Affordable</td><td>Save Money</td></tr>
-          <tr><td>Depends on Contacts</td><td>Direct Digital Requests</td><td>No Middlemen</td></tr>
-          <tr><td>Unpredictable Income</td><td>Consistent Opportunities</td><td>Stable Earnings</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="stats-bar" style="margin-top:48px">
-      <div class="stat-item fade-in fade-in-delay-1">
-        <div class="num">500+</div>
-        <div class="label">Units Managed</div>
-      </div>
-      <div class="stat-item fade-in fade-in-delay-2">
-        <div class="num">50+</div>
-        <div class="label">Verified Eco Partners</div>
-      </div>
-      <div class="stat-item fade-in fade-in-delay-3">
-        <div class="num">3</div>
-        <div class="label">Cities Live</div>
-      </div>
-      <div class="stat-item fade-in fade-in-delay-4">
-        <div class="num">98%</div>
-        <div class="label">Satisfaction Rate</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 9: TESTIMONIALS
-============================================================ -->
-<section id="testimonials" class="section bg-cream">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge">Real Stories</div>
-      <h2 class="section-heading">What Our Users Are <span class="accent">Saying</span></h2>
-      <p class="section-sub">Early adopters from across Hyderabad share their MyAptsOS experience.</p>
-    </div>
-
-    <div class="testimonials-grid">
-      <div class="testi-card fade-in fade-in-delay-1">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"Managing 200+ units was a nightmare before MyAptsOS. Now our entire maintenance flow, payment collection, and vendor assignments are automated. The committee meetings are actually productive now!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar g1">RK</div>
-          <div>
-            <div class="testi-name">Rajesh Kumar</div>
-            <div class="testi-role">🏢 Society Manager, Hyderabad</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-in fade-in-delay-2">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"I was spending ₹500/month on pamphlets and still getting only 2-3 jobs a week. MyAptsOS gave me 15 verified jobs in my first month — from apartments within 3 km of my home. The first month was completely free too!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar g2">SP</div>
-          <div>
-            <div class="testi-name">Srikanth Prasad</div>
-            <div class="testi-role">🤝 Electrician / Eco Partner, Secunderabad</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-in fade-in-delay-3">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"Finding a trustworthy plumber used to take 3 days of asking around. Now I open the app, select a verified plumber with 4.8-star ratings, book a slot, and it's done in 10 minutes. Absolutely game-changing!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar g3">PM</div>
-          <div>
-            <div class="testi-name">Priya Mehta</div>
-            <div class="testi-role">🙋 Resident, Kondapur</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-in fade-in-delay-4">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"I own three properties in Hyderabad and used to chase rents manually every month. MyAptsOS sends auto-reminders and gives me a live payment dashboard. Rent collection is now 96% on time. I should have had this years ago."</p>
-        <div class="testi-author">
-          <div class="testi-avatar g4">AN</div>
-          <div>
-            <div class="testi-name">Ananya Nair</div>
-            <div class="testi-role">🏠 Property Owner, Miyapur</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 10: PRICING
-============================================================ -->
-<section id="pricing" class="section bg-white">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <div class="badge tag-green">Transparent Pricing</div>
-      <h2 class="section-heading">Simple, <span class="accent">Transparent Pricing</span></h2>
-      <p class="section-sub">Start free. Upgrade when you're ready. No hidden fees, no surprises.</p>
-    </div>
-
-    <p class="pricing-section-title">For Societies &amp; Property Managers</p>
-    <div class="pricing-grid">
-      <div class="price-card fade-in fade-in-delay-1">
-        <div class="price-plan">Free</div>
-        <div class="price-amount">₹0</div>
-        <div class="price-per">per month</div>
-        <div class="price-units">Up to 10 units</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><i class="fas fa-check"></i> Basic features</li>
-          <li><i class="fas fa-check"></i> Digital notice board</li>
-          <li><i class="fas fa-check"></i> 1 admin user</li>
-          <li><i class="fas fa-check"></i> Community announcements</li>
-          <li><i class="fas fa-check"></i> Basic support</li>
-        </ul>
-        <a href="#early-access" class="btn btn-outline price-cta">Get Started Free</a>
-      </div>
-      <div class="price-card recommended fade-in fade-in-delay-2">
-        <div class="rec-badge">⭐ Recommended</div>
-        <div class="price-plan">Pro</div>
-        <div class="price-amount"><span>₹</span>999</div>
-        <div class="price-per">per month</div>
-        <div class="price-units">Up to 100 units</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><i class="fas fa-check"></i> All features included</li>
-          <li><i class="fas fa-check"></i> Eco Partner access</li>
-          <li><i class="fas fa-check"></i> Payment tracking &amp; gateway</li>
-          <li><i class="fas fa-check"></i> 3 admin users</li>
-          <li><i class="fas fa-check"></i> Visitor management</li>
-          <li><i class="fas fa-check"></i> Ticketing system</li>
-          <li><i class="fas fa-check"></i> Priority support</li>
-        </ul>
-        <a href="#early-access" class="btn btn-primary price-cta">Start Free Trial</a>
-      </div>
-      <div class="price-card fade-in fade-in-delay-3">
-        <div class="price-plan">Enterprise</div>
-        <div class="price-amount"><span>₹</span>2,999</div>
-        <div class="price-per">per month</div>
-        <div class="price-units">Unlimited units</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><i class="fas fa-check"></i> Full suite — everything in Pro</li>
-          <li><i class="fas fa-check"></i> Priority &amp; dedicated support</li>
-          <li><i class="fas fa-check"></i> Custom onboarding</li>
-          <li><i class="fas fa-check"></i> Unlimited admin users</li>
-          <li><i class="fas fa-check"></i> Advanced analytics</li>
-          <li><i class="fas fa-check"></i> Custom branding options</li>
-          <li><i class="fas fa-check"></i> SLA guarantee</li>
-        </ul>
-        <a href="#early-access" class="btn btn-outline price-cta">Contact Us</a>
-      </div>
-    </div>
-
-    <p class="pricing-section-title" style="margin-top:16px">For Eco Partners / Vendors</p>
-    <div class="eco-pricing-banner fade-in">
+<!-- MISSION -->
+<section id="mission">
+  <div class="section-card">
+    <div class="section-head reveal">
       <div>
-        <h3>First Month <span style="color:#f5b95c">FREE</span> — then just ₹99/month</h3>
-        <p style="color:rgba(255,255,255,0.75)">Everything you need to start getting verified job requests from nearby apartments.</p>
-        <div class="eco-pricing-incl">
-          <span class="eco-incl-tag"><i class="fas fa-bell" style="margin-right:5px"></i>Job Request Notifications</span>
-          <span class="eco-incl-tag"><i class="fas fa-id-card" style="margin-right:5px"></i>Profile Listing</span>
-          <span class="eco-incl-tag"><i class="fas fa-star" style="margin-right:5px"></i>Customer Ratings</span>
-          <span class="eco-incl-tag"><i class="fab fa-whatsapp" style="margin-right:5px"></i>WhatsApp Job Alerts</span>
+        <div class="section-kicker">Our Mission</div>
+        <h2 class="section-title">One Vision. Three Platforms. All of India.</h2>
+      </div>
+    </div>
+    <div class="group-grid">
+      <div class="vision-panel reveal">
+        <h3>Why MyOS Group Exists</h3>
+        <p style="color:var(--muted);font-size:.97rem;line-height:1.72">India is building its digital future at every level — gated societies, city wards, and individual households. Yet the tools available are generic, foreign, and disconnected from how India actually lives. MyOS Group builds purpose-built operating systems for India's unique communities, civic structures, and life realities — starting from Hyderabad, scaling with India.</p>
+        <div class="principles">
+          <div class="principle"><strong>🇮🇳 India-First Design</strong><p>Every feature is built for UPI, WhatsApp, RWAs, ward councillors, and local vendors — not adapted from Western SaaS.</p></div>
+          <div class="principle"><strong>🏙️ Community-Centric</strong><p>We don't serve users in isolation. We serve the communities, institutions, and relationships they live within.</p></div>
+          <div class="principle"><strong>📲 WhatsApp-Native</strong><p>We meet people where they already are — no new app downloads, no new logins, no behavior change required.</p></div>
         </div>
       </div>
-      <a href="#eco-register" class="btn btn-primary btn-lg" style="white-space:nowrap">
-        <i class="fas fa-handshake"></i> Register — Start Free
-      </a>
-    </div>
-
-    <div class="pricing-note fade-in">
-      <i class="fas fa-gift"></i>
-      <strong>Free 1 Month Trial for Societies</strong> — No credit card required. Cancel anytime.
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 11: EARLY ACCESS / WAITLIST
-============================================================ -->
-<section id="early-access" class="early-access-section">
-  <div class="container">
-    <div class="early-inner">
-      <div class="early-text">
-        <div class="badge" style="background:rgba(224,123,42,0.2);color:#f5b95c;border-color:rgba(224,123,42,0.3)">
-          Early Access
-        </div>
-        <h2>Be Among the First Apartments<br />to <span style="color:#f5b95c">Go Live</span></h2>
-        <p>Limited early access slots available for Hyderabad societies. Get priority onboarding, dedicated support, and a full free trial.</p>
-        <ul class="early-bullets">
-          <li><i class="fas fa-check-circle"></i> Free 1-month trial — no payment needed</li>
-          <li><i class="fas fa-check-circle"></i> Dedicated onboarding specialist</li>
-          <li><i class="fas fa-check-circle"></i> Priority access to Eco Partner network</li>
-          <li><i class="fas fa-check-circle"></i> Founding member pricing locked in</li>
+      <div class="build-panel reveal reveal-1">
+        <h3>What We're Building</h3>
+        <ul class="build-list">
+          <li><b>🏢</b><div><h4>Residential Infrastructure</h4><p>MyAptsOS manages the 50,000+ gated communities across India's Tier-1 cities — starting in Hyderabad.</p></div></li>
+          <li><b>🏛️</b><div><h4>Civic Infrastructure</h4><p>MyCivicOS digitizes ward-level governance for Telangana's 10,000+ wards — WhatsApp as the interface.</p></div></li>
+          <li><b>🌱</b><div><h4>Personal Infrastructure</h4><p>MyLifeOS guides individuals from childhood to leadership — one structured, personalized platform.</p></div></li>
+          <li><b>🔗</b><div><h4>Connected Ecosystem</h4><p>Three platforms that share community data, local services, and civic identity — one MyOS identity.</p></div></li>
         </ul>
       </div>
-      <div class="early-form-card">
-        <h3>Request Early Access</h3>
-        <p>Fill in your details and we'll reach out on WhatsApp within 24 hours.</p>
-        <form id="earlyForm" onsubmit="submitEarlyForm(event)">
-          <div class="early-form-grid">
-            <div class="early-row">
-              <div class="form-group">
-                <label for="ea-name">Name <span class="req">*</span></label>
-                <input type="text" id="ea-name" placeholder="Your name" required />
-              </div>
-              <div class="form-group">
-                <label for="ea-email">Email <span class="req">*</span></label>
-                <input type="email" id="ea-email" placeholder="you@email.com" required />
-              </div>
-            </div>
-            <div class="early-row">
-              <div class="form-group">
-                <label for="ea-city">City <span class="req">*</span></label>
-                <input type="text" id="ea-city" placeholder="e.g. Hyderabad" required />
-              </div>
-              <div class="form-group">
-                <label for="ea-units">Number of Units</label>
-                <select id="ea-units">
-                  <option value="">Select</option>
-                  <option>1–10</option>
-                  <option>11–50</option>
-                  <option>51–100</option>
-                  <option>100+</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="ea-role">Your Role</label>
-              <select id="ea-role">
-                <option value="">Select role</option>
-                <option>Owner</option>
-                <option>Manager</option>
-                <option>Resident</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">
-              <i class="fas fa-rocket"></i> Request Early Access — It's Free
-            </button>
-          </div>
-        </form>
-        <div class="success-msg success-msg-orange" id="earlySuccess">
-          🎉 You're on the list! We'll contact you on WhatsApp within 24 hours. Welcome to MyAptsOS!
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     SECTION 12: FOOTER
-============================================================ -->
-<footer id="contact">
-  <div class="container">
-    <div class="footer-inner">
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-card">
+    <div class="section-head reveal">
       <div>
-        <div class="footer-logo">
-          <div class="logo-icon"><i class="fas fa-building"></i></div>
-          MyApts<span class="os">OS</span>
-        </div>
-        <p class="footer-tagline">
-          Smart Living. Simplified.<br />
-          Your complete property management OS — built for Indian apartment complexes &amp; housing societies.
-        </p>
-        <div class="footer-socials">
-          <a href="https://www.instagram.com" target="_blank" class="social-btn" title="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" class="social-btn" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://wa.me/918978629192" target="_blank" class="social-btn" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#eco-partners">Eco Partners</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#early-access">Register Society</a></li>
-          <li><a href="#eco-register">Register as Vendor</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Us</h4>
-        <ul class="footer-contact">
-          <li>
-            <i class="fas fa-phone-alt"></i>
-            <a href="tel:+918978629192">+91 89786 29192</a>
-          </li>
-          <li>
-            <i class="fab fa-whatsapp"></i>
-            <a href="https://wa.me/918978629192" target="_blank">WhatsApp: +91 89786 29192</a>
-          </li>
-          <li>
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:myos@myosbharat.com">myos@myosbharat.com</a>
-          </li>
-          <li>
-            <i class="fas fa-external-link-alt"></i>
-            <a href="https://www.forms.gle/j6WE83DMEjDuBKN9" target="_blank">Partner Registration Form</a>
-          </li>
-          <li>
-            <i class="fas fa-map-marker-alt"></i>
-            Hyderabad, Telangana, India
-          </li>
-        </ul>
+        <div class="section-kicker">Platform Status</div>
+        <h2 class="section-title">Where We Are. Where We're Going.</h2>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 MyAptsOS. All rights reserved. Built with ❤️ in Hyderabad, India 🇮🇳</p>
-      <p style="color:rgba(255,255,255,0.2)">Smart Property Management for Bharat</p>
+    <div class="timeline">
+      <div class="tl-card tl-apts reveal">
+        <small>● Live Now</small>
+        <h3>MyAptsOS</h3>
+        <p>Live in Hyderabad. Serving gated communities with UPI payments, complaints, gate management, and a hyperlocal vendor marketplace.</p>
+        <ul>
+          <li>500+ flats under management</li>
+          <li>UPI-based activation (no credit card)</li>
+          <li>4 role types: Resident, Admin, Vendor, SuperAdmin</li>
+          <li>Plans: ₹999/mo Base · ₹1,799/mo Full</li>
+        </ul>
+      </div>
+      <div class="tl-card tl-civic reveal reveal-1">
+        <small>◑ In Development</small>
+        <h3>MyCivicOS</h3>
+        <p>Built for Telangana's ward councillors. WhatsApp-native complaint routing with real-time dashboards and QR-code citizen onboarding.</p>
+        <ul>
+          <li>WhatsApp Cloud API (Meta verified)</li>
+          <li>QR code per councillor ward</li>
+          <li>Telugu + English language support</li>
+          <li>Targeting Telangana ULBs · GHMC</li>
+        </ul>
+      </div>
+      <div class="tl-card tl-life reveal reveal-2">
+        <small>◌ Coming Soon</small>
+        <h3>MyLifeOS</h3>
+        <p>A personal and household operating system designed around India's life stages — from school to career to family to leadership.</p>
+        <ul>
+          <li>5 life-stage modules (Age 0–60+)</li>
+          <li>Finance, health, goals, tasks in one app</li>
+          <li>Smart guidance engine — adapts to you</li>
+          <li>Local service discovery built in</li>
+        </ul>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-card" id="contact">
+  <div class="cta-grid">
+    <div>
+      <h2>Let's Build India's Communities Together.</h2>
+      <p>Whether you're an apartment association, ward councillor, municipal body, investor, or potential partner — we want to hear from you. Based in Hyderabad, building for India.</p>
+      <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:14px">
+        <span style="font-size:.9rem;color:rgba(247,240,228,.6)">📧 hello@myosgroup.in</span>
+        <span style="font-size:.9rem;color:rgba(247,240,228,.6)">📍 Hyderabad, Telangana</span>
+      </div>
+    </div>
+    <div class="cta-box">
+      <strong>Send us a message</strong>
+      <div class="cta-form" id="ctaForm">
+        <input type="text" placeholder="Your name" />
+        <input type="text" placeholder="Organisation / Society / Ward" />
+        <input type="email" placeholder="Email address" />
+        <input type="tel" placeholder="WhatsApp number" />
+        <button onclick="submitCTA()">Send Message →</button>
+      </div>
+      <div class="cta-success" id="ctaSuccess">✅ Thanks! We'll respond within 24 hours.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 MyOS Group · Hyderabad, Telangana</span>
+  <span>MyAptsOS · MyCivicOS · MyLifeOS</span>
+  <a href="mailto:hello@myosgroup.in">hello@myosgroup.in</a>
 </footer>
 
-<!-- ============================================================
-     JAVASCRIPT
-============================================================ -->
+<!-- ═══════════════════════════════════════════════
+     MODAL: MyAptsOS
+════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-apts">
+  <button class="modal-close" onclick="closeModal('apts')">✕</button>
+  <div class="modal">
+    <div class="m-hero m-hero-apts">
+      <div class="m-eyebrow m-eyebrow-apts">🏢 MyAptsOS · Live in Hyderabad</div>
+      <div class="m-title">Apartment Society Operating System</div>
+      <p class="m-tagline">The complete platform for Indian gated communities and RWA-governed societies. From the moment a resident pays maintenance to the gate log of their last visitor — every operation managed, tracked, and resolved in one app.</p>
+      <div class="m-hero-stats">
+        <div class="m-stat"><strong>500+</strong><span>Flats Managed</span></div>
+        <div class="m-stat"><strong>₹999/mo</strong><span>Base Plan</span></div>
+        <div class="m-stat"><strong>4</strong><span>User Roles</span></div>
+        <div class="m-stat"><strong>0</strong><span>Credit Cards Required</span></div>
+      </div>
+    </div>
+    <div class="m-body">
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-apts">Why It Matters</div>
+        <h2>The Real Cost of a Disorganised Society</h2>
+        <p>Across India's 50,000+ gated communities, RWA admins spend 3–5 days every month chasing maintenance payments over WhatsApp. Complaints get lost in group chats. Visitors enter unverified. Vendors arrive unvetted. MyAptsOS replaces all of that with one structured, role-aware platform — built for how Indian societies actually operate.</p>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-apts">Key Benefits</div>
+        <h2>What Changes When You Run MyAptsOS</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card"><div class="benefit-icon">⚡</div><h4>Maintenance in Minutes, Not Days</h4><p>Residents pay via UPI and submit the UTR. Admin approves from the dashboard. No follow-up calls. No spreadsheets. No bank portal hassle.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🔍</div><h4>Zero Complaints Fall Through</h4><p>Every complaint is logged, categorized, assigned, and tracked with a full audit trail — from first submission to final resolution.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🔒</div><h4>Gate Security You Can Trust</h4><p>Visitors, deliveries, and staff are pre-approved, logged, and tracked in real time. Know exactly who is in your society at any moment.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🛠️</div><h4>Trusted Local Vendors, On Demand</h4><p>Residents access verified plumbers, electricians, and cleaners — vetted by the society, rated by neighbours, available immediately.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">📢</div><h4>Instant Society-Wide Communication</h4><p>Send broadcasts and emergency SOS alerts to every resident in seconds — power cuts, water supply, AGM notices, emergency situations.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">📊</div><h4>Full Financial Visibility</h4><p>Admins see real-time collection rates, pending dues, and monthly summaries — no more end-of-month reconciliation nightmares.</p></div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-apts">Stakeholders</div>
+        <h2>Built for Every Role in Your Society</h2>
+        <div class="stakeholders-grid">
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-apts">🏠</div><div><div class="stakeholder-name">Residents</div><div class="stakeholder-role">Flat owners & tenants</div></div></div>
+            <ul>
+              <li class="li-apts">Pay maintenance via UPI — get instant confirmation</li>
+              <li class="li-apts">Raise complaints and track progress in real time</li>
+              <li class="li-apts">Pre-approve visitors before they reach the gate</li>
+              <li class="li-apts">Book verified local vendors for home services</li>
+              <li class="li-apts">Receive SOS alerts and society-wide broadcasts</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-apts">🔑</div><div><div class="stakeholder-name">RWA Admins & Secretaries</div><div class="stakeholder-role">Primary decision-makers</div></div></div>
+            <ul>
+              <li class="li-apts">Approve UTR payments with one click</li>
+              <li class="li-apts">Assign and track complaints by category and status</li>
+              <li class="li-apts">Manage gate entries and staff attendance</li>
+              <li class="li-apts">Send broadcasts and emergency alerts instantly</li>
+              <li class="li-apts">View real-time collection and occupancy reports</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-apts">🛠️</div><div><div class="stakeholder-name">Vendors (Eco Partners)</div><div class="stakeholder-role">Local service providers</div></div></div>
+            <ul>
+              <li class="li-apts">Get discovered by residents in your area — free to join</li>
+              <li class="li-apts">Accept job requests and manage your schedule</li>
+              <li class="li-apts">Track earnings and reviews from one dashboard</li>
+              <li class="li-apts">Build a local clientele of verified society residents</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-apts">⚙️</div><div><div class="stakeholder-name">SuperAdmin (Myosgroup)</div><div class="stakeholder-role">Platform oversight</div></div></div>
+            <ul>
+              <li class="li-apts">Approve and onboard new societies</li>
+              <li class="li-apts">Manage subscriptions and activation status</li>
+              <li class="li-apts">Full platform analytics and health monitoring</li>
+              <li class="li-apts">Control vendor verification and eco-partner network</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-apts">Platform Features</div>
+        <h2>Everything Your Society Needs</h2>
+        <div class="features-grid">
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">💰</div><div><h4>UPI Maintenance Payments</h4><p>Residents submit UTR after paying via any UPI app. Admin approves. No payment gateway, no auto-debit, no bank integration required.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">🚨</div><div><h4>Complaint Management</h4><p>Full lifecycle tracking: log → assign → resolve → close. Category filters, priority tags, and complete audit trail.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">🚪</div><div><h4>Gate & Visitor Logs</h4><p>Pre-approved entries, delivery tracking, staff attendance, and real-time gate occupancy — all visible to admin and residents.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">📢</div><div><h4>Broadcasts & Emergency SOS</h4><p>Society-wide announcements and emergency SOS alerts that reach every resident instantly — no delay, no friction.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">🛠️</div><div><h4>Vendor Marketplace</h4><p>Verified local vendors for plumbing, electrical, cleaning, and more — browsable, bookable, and reviewable by residents.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-apts">📊</div><div><h4>Contact Directory & Staff Mgmt</h4><p>Full resident directory, committee contacts, security staff records, and maintenance personnel — all in one place.</p></div></div>
+        </div>
+      </div>
+
+      <div class="m-cta-strip m-cta-apts">
+        <div><h3>Ready to Modernise Your Society?</h3><p>Activate via UPI — no credit card, no auto-renewal. Your society is live in 24 hours.</p></div>
+        <a href="#contact" class="m-cta-btn m-cta-btn-apts" onclick="closeModal('apts')">Request Activation →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     MODAL: MyCivicOS
+════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-civic">
+  <button class="modal-close" onclick="closeModal('civic')">✕</button>
+  <div class="modal">
+    <div class="m-hero m-hero-civic">
+      <div class="m-eyebrow m-eyebrow-civic">🏛️ MyCivicOS · Telangana ULBs · Digital India Aligned</div>
+      <div class="m-title">Smart Civic Governance Platform</div>
+      <p class="m-tagline">Bridging the gap between elected ward councillors and the citizens they serve — through WhatsApp-native complaint management, QR-code onboarding, and real-time ward dashboards. No app download needed. No new behaviour required.</p>
+      <div class="m-hero-stats">
+        <div class="m-stat"><strong>10K+</strong><span>Target Wards in Telangana</span></div>
+        <div class="m-stat"><strong>WhatsApp</strong><span>No App Download</span></div>
+        <div class="m-stat"><strong>&lt;24hr</strong><span>Ward Onboarding</span></div>
+        <div class="m-stat"><strong>EN+TE</strong><span>Bilingual Support</span></div>
+      </div>
+    </div>
+    <div class="m-body">
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-civic">The Problem</div>
+        <h2>The Gap Between Councillors and Citizens</h2>
+        <p>Ward councillors in Telangana receive hundreds of complaints through phone calls, personal visits, and unstructured WhatsApp messages every week. There is no system — complaints get lost, timelines are invisible, and citizens feel unheard. MyCivicOS turns every ward councillor into a digitally-empowered public servant — with zero behavior change required from citizens.</p>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-civic">How It Works</div>
+        <h2>From Complaint to Resolution — In Minutes</h2>
+        <div class="wa-section">
+          <div class="wa-steps">
+            <div class="wa-step"><div class="wa-step-num">1</div><div><h4>Citizen Scans Ward QR</h4><p>Unique QR code on hoardings, pamphlets, or ID cards. WhatsApp opens automatically.</p></div></div>
+            <div class="wa-step"><div class="wa-step-num">2</div><div><h4>Files Complaint via WhatsApp</h4><p>Selects category (Roads / Water / Sanitation), describes issue, optionally uploads a photo. Gets Complaint ID instantly.</p></div></div>
+            <div class="wa-step"><div class="wa-step-num">3</div><div><h4>Councillor Gets Instant Alert</h4><p>Dashboard notifies councillor. Field team assigned with SLA timer. Citizen tracked automatically.</p></div></div>
+            <div class="wa-step"><div class="wa-step-num">4</div><div><h4>Resolved with Proof</h4><p>Field team uploads photo evidence. Citizen receives WhatsApp confirmation. Audit trail complete.</p></div></div>
+          </div>
+          <div class="wa-flow">
+            <div class="wa-msg in">నమస్కారం! మీ వార్డు కౌన్సిలర్ కు మీ సమస్య చెప్పండి.<small>MyCivicOS</small></div>
+            <div class="wa-msg out">Road is broken near Block C — vehicles are getting damaged.<small>10:14 AM ✓✓</small></div>
+            <div class="wa-msg in">✅ Complaint #WD-2024-0892 filed. Councillor has been notified. Expected resolution: 48 hrs.<small>10:14 AM</small></div>
+            <div class="wa-msg in">🔄 Update: Your complaint is assigned to the roads team. Work begins tomorrow morning.<small>11:32 AM</small></div>
+            <div class="wa-msg in">✅ Resolved! Road repair complete. [Photo attached]. Rate your experience: 1-5.<small>Next day</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-civic">Key Benefits</div>
+        <h2>What Changes for Every Stakeholder</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card"><div class="benefit-icon">📲</div><h4>Zero Friction for Citizens</h4><p>No app to download, no account to create. Just WhatsApp — which every citizen already has. Scan, message, done.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">📊</div><h4>Councillor Accountability</h4><p>Every complaint is tracked with a timer. Overdue alerts escalate automatically. Councillors build visible, measurable track records.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🔲</div><h4>QR Code Anywhere</h4><p>Print on hoardings, pamphlets, offices, ID cards. Citizens scan once and stay connected to their ward forever.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🏛️</div><h4>ULB-Level Visibility</h4><p>Municipal administrators see cross-ward analytics, identify problem areas, and track councillor performance from one dashboard.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🌐</div><h4>Telugu Language Native</h4><p>WhatsApp flows in Telugu for Telangana citizens — bridging the digital-language divide at the last mile.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🇮🇳</div><h4>Digital India Aligned</h4><p>Complements BharatNet and e-governance initiatives. Designed to plug into existing government workflows, not replace them.</p></div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-civic">Stakeholders</div>
+        <h2>Built for Every Role in the Ward</h2>
+        <div class="stakeholders-grid">
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-civic">👤</div><div><div class="stakeholder-name">Ward Councillors</div><div class="stakeholder-role">Elected representatives</div></div></div>
+            <ul>
+              <li class="li-civic">Real-time complaint dashboard — see everything at a glance</li>
+              <li class="li-civic">Assign complaints to field teams with SLA timers</li>
+              <li class="li-civic">Send WhatsApp broadcasts to entire ward subscriber base</li>
+              <li class="li-civic">Auto-generated impact reports for political campaigns</li>
+              <li class="li-civic">Ward health score — a single number to improve</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-civic">🏘️</div><div><div class="stakeholder-name">Citizens</div><div class="stakeholder-role">Ward residents</div></div></div>
+            <ul>
+              <li class="li-civic">File complaints via WhatsApp — no download, no login</li>
+              <li class="li-civic">Receive real-time status updates at every stage</li>
+              <li class="li-civic">Access ward councillor by scanning one QR code</li>
+              <li class="li-civic">Interact in Telugu or English — their choice</li>
+              <li class="li-civic">Rate resolution quality — drives accountability</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-civic">🏛️</div><div><div class="stakeholder-name">Municipal Administration</div><div class="stakeholder-role">ULB / GHMC officials</div></div></div>
+            <ul>
+              <li class="li-civic">Cross-ward analytics — see city-wide complaint patterns</li>
+              <li class="li-civic">Councillor performance tracking and comparison</li>
+              <li class="li-civic">Export PDF/Excel compliance reports for government use</li>
+              <li class="li-civic">Configure SLA targets and escalation thresholds</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-civic">🔧</div><div><div class="stakeholder-name">Field Teams</div><div class="stakeholder-role">On-ground workers</div></div></div>
+            <ul>
+              <li class="li-civic">Receive assigned complaints on WhatsApp</li>
+              <li class="li-civic">Upload photo evidence of completed work</li>
+              <li class="li-civic">Mark resolutions from the field — no office visit needed</li>
+              <li class="li-civic">View workload and priority queue daily</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-civic">Platform Features</div>
+        <h2>Six Integrated Modules</h2>
+        <div class="features-grid">
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">📋</div><div><h4>Complaint Lifecycle Management</h4><p>Intake → assign → field work → photo resolution → citizen notification. SLA timers, category tags, full audit trail.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">📲</div><div><h4>WhatsApp Cloud API Integration</h4><p>Meta-verified business number. Automated flows with human escalation. Telugu and English template support.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">🔲</div><div><h4>QR Code Ecosystem</h4><p>Dynamic QR codes per councillor with scan analytics. Printable for hoardings, pamphlets, office walls.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">📊</div><div><h4>Ward Analytics Dashboard</h4><p>Real-time ward health score, category heatmaps, daily/weekly/monthly trends, PDF/Excel export.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">🔔</div><div><h4>Automated Notifications & Escalation</h4><p>Status updates to citizens. Overdue alerts to councillors. Broadcast announcements to ward subscribers.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-civic">🔒</div><div><h4>Security & Compliance</h4><p>Role-based access, encrypted PostgreSQL storage, IT Act aligned, full audit logs, Meta-verified API.</p></div></div>
+        </div>
+      </div>
+
+      <div class="m-cta-strip m-cta-civic">
+        <div><h3>Ready to Transform Your Ward?</h3><p>Get a personalised demo within 24 hours. Ward goes live in under 24 hours from onboarding.</p></div>
+        <a href="#contact" class="m-cta-btn m-cta-btn-civic" onclick="closeModal('civic')">Request Demo →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     MODAL: MyLifeOS
+════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-life">
+  <button class="modal-close" onclick="closeModal('life')">✕</button>
+  <div class="modal">
+    <div class="m-hero m-hero-life">
+      <div class="m-eyebrow m-eyebrow-life">🌱 MyLifeOS · Coming Soon · 2026</div>
+      <div class="m-title">Your Personal Operating System for Life</div>
+      <p class="m-tagline">An intelligent life management platform that adapts to your age, priorities, and life stage — helping you build habits, achieve goals, manage responsibilities, and make better decisions from childhood through leadership. One platform. Every stage of life.</p>
+      <div class="m-hero-stats">
+        <div class="m-stat"><strong>5</strong><span>Life Stage Modules</span></div>
+        <div class="m-stat"><strong>8+</strong><span>Core Modules</span></div>
+        <div class="m-stat"><strong>0–60+</strong><span>Age Coverage</span></div>
+        <div class="m-stat"><strong>2026</strong><span>Target Launch</span></div>
+      </div>
+    </div>
+    <div class="m-body">
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-life">The Problem</div>
+        <h2>Modern Life Is Fragmented. MyLifeOS Connects It.</h2>
+        <p>People use one app for tasks, another for finance, another for habits, another for goals, another for career. But life itself is connected — your finances affect your career, your habits affect your health, your goals affect your family. MyLifeOS brings everything into one structured ecosystem, designed specifically around how human life actually progresses through stages.</p>
+        <p>Unlike generic productivity apps built for Western markets, MyLifeOS is designed for Indian life — joint families, local education systems, regional career paths, vernacular languages, and community-based living.</p>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-life">Life Stages Framework</div>
+        <h2>Designed Around How Life Actually Works</h2>
+        <div class="stages-grid">
+          <div class="stage-card"><div class="stage-age">Age 0–12</div><div class="stage-name">Foundation</div><div class="stage-goal">Learning · Discipline · Curiosity</div></div>
+          <div class="stage-card"><div class="stage-age">Age 13–21</div><div class="stage-name">Growth</div><div class="stage-goal">Education · Skill Building</div></div>
+          <div class="stage-card"><div class="stage-age">Age 22–30</div><div class="stage-name">Career Launch</div><div class="stage-goal">Job · Income · Stability</div></div>
+          <div class="stage-card"><div class="stage-age">Age 31–45</div><div class="stage-name">Stability</div><div class="stage-goal">Family · Wealth · Growth</div></div>
+          <div class="stage-card"><div class="stage-age">Age 46–60+</div><div class="stage-name">Leadership</div><div class="stage-goal">Legacy · Mentorship</div></div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-life">Key Benefits</div>
+        <h2>What Changes When You Use MyLifeOS</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card"><div class="benefit-icon">🧭</div><h4>Personalised Life Guidance</h4><p>The platform knows your life stage and suggests what matters most right now — not generic advice, but stage-specific actions.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🔗</div><h4>Everything Connected</h4><p>Your finance decisions connect to your goals. Your habits connect to your health. Your network connects to your career. All in one view.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">📈</div><h4>Long-Term Growth Tracking</h4><p>Track progress across years, not just days. See how you've grown since your last life stage and where you're heading next.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">👨‍👩‍👧</div><h4>Family & Community Layer</h4><p>Coordinate with family members, stay connected with mentors, and find accountability partners in your local community.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🏪</div><h4>Local Service Discovery</h4><p>Find coaching institutes, study circles, jobs, healthcare, and professional services near you — integrated into your life plan.</p></div>
+          <div class="benefit-card"><div class="benefit-icon">🤖</div><h4>Smart Guidance Engine</h4><p>Context-aware suggestions that evolve with your behaviour: "Apply for 3 jobs today." "Review monthly expenses." "30 minutes of revision."</p></div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-life">Stakeholders</div>
+        <h2>Every Person at Every Life Stage</h2>
+        <div class="stakeholders-grid">
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-life">🎒</div><div><div class="stakeholder-name">Students (Age 13–21)</div><div class="stakeholder-role">Foundation & Growth Stages</div></div></div>
+            <ul>
+              <li class="li-life">Study planner and exam reminders</li>
+              <li class="li-life">Skill tracker and career exploration tools</li>
+              <li class="li-life">Daily goal setting with gamified streaks</li>
+              <li class="li-life">Notes capture and quick reference</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-life">💼</div><div><div class="stakeholder-name">Young Professionals (22–30)</div><div class="stakeholder-role">Career Launch Stage</div></div></div>
+            <ul>
+              <li class="li-life">Job application and interview tracker</li>
+              <li class="li-life">Expense tracking and financial goal setting</li>
+              <li class="li-life">Task manager and meeting scheduler</li>
+              <li class="li-life">Skill development planner aligned to career goals</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-life">🏠</div><div><div class="stakeholder-name">Families & Professionals (31–45)</div><div class="stakeholder-role">Growth & Stability Stage</div></div></div>
+            <ul>
+              <li class="li-life">Family coordination and shared household tasks</li>
+              <li class="li-life">Investment tracking and financial planning</li>
+              <li class="li-life">Health tracking — sleep, fitness, wellbeing</li>
+              <li class="li-life">Advanced productivity analytics</li>
+            </ul>
+          </div>
+          <div class="stakeholder">
+            <div class="stakeholder-top"><div class="stakeholder-icon si-life">🌟</div><div><div class="stakeholder-name">Leaders & Mentors (46–60+)</div><div class="stakeholder-role">Leadership Stage</div></div></div>
+            <ul>
+              <li class="li-life">Strategic goal planning and legacy tracking</li>
+              <li class="li-life">Mentorship management and knowledge journal</li>
+              <li class="li-life">Business KPI dashboard and networking tracker</li>
+              <li class="li-life">Health reminders and preventive wellness plans</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-kicker m-kicker-life">Core Modules</div>
+        <h2>Eight Modules. One Integrated Life.</h2>
+        <div class="features-grid">
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">📋</div><div><h4>Task Management</h4><p>Plan and manage daily activities with priorities and smart reminders — synced to your life stage goals.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">🔄</div><div><h4>Habit Tracker</h4><p>Build consistency through streak tracking, visual progress rings, and stage-appropriate habit recommendations.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">🎯</div><div><h4>Goal Management</h4><p>Set milestones, break them into actions, track progress, and celebrate meaningful outcomes with your accountability network.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">💰</div><div><h4>Finance Manager</h4><p>Track income, expenses, savings, and investments — with life-stage benchmarks to know if you're on track.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">❤️</div><div><h4>Health Tracker</h4><p>Monitor sleep, water intake, fitness routines, and overall wellbeing — integrated into your daily life plan.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">📁</div><div><h4>Document Vault</h4><p>Securely store certificates, bills, warranties, and important files — accessible anywhere, organised by life category.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">👥</div><div><h4>Human Network</h4><p>Stay connected with mentors, accountability partners, family, and peers — relationship management built into your OS.</p></div></div>
+          <div class="feature-item"><div class="feature-icon-wrap fi-life">🗺️</div><div><h4>Local Discovery</h4><p>Find coaching institutes, jobs, healthcare, study circles, and professional services near you — integrated into your life plan.</p></div></div>
+        </div>
+      </div>
+
+      <div class="m-cta-strip m-cta-life">
+        <div><h3>Get Notified at Launch.</h3><p>MyLifeOS launches in 2026. Join the early access list and be among the first to experience your personal OS.</p></div>
+        <a href="#contact" class="m-cta-btn m-cta-btn-life" onclick="closeModal('life')">Join Early Access →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
-  /* ---- Mobile menu ---- */
-  function toggleMenu() {
-    const ham = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    ham.classList.toggle('open');
-    menu.classList.toggle('open');
-  }
-  function closeMenu() {
-    document.getElementById('hamburger').classList.remove('open');
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
+// Nav scroll
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.style.background = window.scrollY > 60 ? 'rgba(12,27,19,.97)' : 'rgba(12,27,19,.82)');
 
-  /* ---- Audience tabs ---- */
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
-    btn.classList.add('active');
-  }
+// Mobile menu
+document.getElementById('navHam').addEventListener('click', () => document.getElementById('mobMenu').classList.add('open'));
+document.getElementById('mobClose').addEventListener('click', () => document.getElementById('mobMenu').classList.remove('open'));
+function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
 
-  /* ---- How it works tabs ---- */
-  function switchHow(tab, btn) {
-    document.querySelectorAll('.how-pane').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.how-tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('how-' + tab).classList.add('active');
-    btn.classList.add('active');
-  }
+// Modal
+function openModal(id) {
+  const m = document.getElementById('modal-' + id);
+  m.classList.add('open');
+  m.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) { o.classList.remove('open'); document.body.style.overflow = ''; } });
+});
+// ESC key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(o => { o.classList.remove('open'); document.body.style.overflow = ''; }); } });
 
-  /* ============================================================
-     GOOGLE SHEETS INTEGRATION
-     STEP: After deploying your Apps Script, paste your Web App
-     URL below to replace the placeholder.
-  ============================================================ */
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkvzJ2y89s2jRzZw_8Q7DvNcgDLLuPgbRXNO_djudAmWctbH7kaF0qKThpYpUJlaOs/exec';
+// Scroll reveal
+const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }), { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  /* Helper — sends JSON payload to Google Sheets via Apps Script */
-  async function sendToSheet(payload) {
-    // mode: 'no-cors' is required for Apps Script Web Apps from a browser
-    await fetch(APPS_SCRIPT_URL, {
-      method : 'POST',
-      mode   : 'no-cors',          // Apps Script doesn't return CORS headers on POST
-      headers: { 'Content-Type': 'application/json' },
-      body   : JSON.stringify(payload)
-    });
-    // no-cors means we can't read the response — that's fine, Apps Script still runs
-  }
-
-  /* ---- Eco Partner form ---- */
-  async function submitEcoForm(e) {
-    e.preventDefault();
-
-    const btn = document.querySelector('#ecoForm button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
-    btn.disabled = true;
-
-    const payload = {
-      formType    : 'Eco Partner Registration',
-      timestamp   : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-      name        : document.getElementById('eco-name').value.trim(),
-      businessName: document.getElementById('eco-business').value.trim(),
-      category    : document.getElementById('eco-category').value,
-      city        : document.getElementById('eco-city').value.trim(),
-      phone       : document.getElementById('eco-phone').value.trim(),
-      whatsapp    : document.getElementById('eco-whatsapp').value.trim(),
-      description : document.getElementById('eco-desc').value.trim(),
-      source      : document.getElementById('eco-source').value
-    };
-
-    try {
-      // Only call the API if the URL has been configured
-      if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxkvzJ2y89s2jRzZw_8Q7DvNcgDLLuPgbRXNO_djudAmWctbH7kaF0qKThpYpUJlaOs/exec') {
-        await sendToSheet(payload);
-      }
-    } catch (err) {
-      // Silently continue — show success to user even if network fails
-      console.warn('Sheet submission error:', err);
-    } finally {
-      document.getElementById('ecoForm').style.display = 'none';
-      const msg = document.getElementById('ecoSuccess');
-      msg.classList.add('show');
-      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  /* ---- Early Access form ---- */
-  async function submitEarlyForm(e) {
-    e.preventDefault();
-
-    const btn = document.querySelector('#earlyForm button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
-    btn.disabled = true;
-
-    const payload = {
-      formType    : 'Early Access Request',
-      timestamp   : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-      name        : document.getElementById('ea-name').value.trim(),
-      email       : document.getElementById('ea-email').value.trim(),
-      city        : document.getElementById('ea-city').value.trim(),
-      units       : document.getElementById('ea-units').value,
-      role        : document.getElementById('ea-role').value,
-      phone       : '',   // field not in this form — kept for sheet column consistency
-      businessName: '',
-      category    : '',
-      description : '',
-      source      : ''
-    };
-
-    try {
-      if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxkvzJ2y89s2jRzZw_8Q7DvNcgDLLuPgbRXNO_djudAmWctbH7kaF0qKThpYpUJlaOs/exec') {
-        await sendToSheet(payload);
-      }
-    } catch (err) {
-      console.warn('Sheet submission error:', err);
-    } finally {
-      document.getElementById('earlyForm').style.display = 'none';
-      const msg = document.getElementById('earlySuccess');
-      msg.classList.add('show');
-      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  /* ---- Scroll fade-in observer ---- */
-  (function() {
-    const elements = document.querySelectorAll('.fade-in');
-    if (!('IntersectionObserver' in window)) {
-      elements.forEach(el => el.classList.add('visible'));
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    elements.forEach(el => observer.observe(el));
-  })();
-
-  /* ---- Smooth scroll for nav on mobile ---- */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        const navHeight = document.getElementById('navbar').offsetHeight;
-        const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
-  });
-
-  /* ---- Active nav highlight on scroll ---- */
-  (function() {
-    const sections = document.querySelectorAll('section[id], footer[id]');
-    const links = document.querySelectorAll('.nav-links a');
-    const navH = () => document.getElementById('navbar').offsetHeight;
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - navH() - 80) {
-          current = sec.id;
-        }
-      });
-      links.forEach(link => {
-        link.style.color = link.getAttribute('href') === '#' + current ? '#1a5c2a' : '';
-        link.style.fontWeight = link.getAttribute('href') === '#' + current ? '700' : '';
-      });
-    }, { passive: true });
-  })();
+// CTA form
+function submitCTA() {
+  document.getElementById('ctaForm').style.display = 'none';
+  document.getElementById('ctaSuccess').style.display = 'block';
+}
 </script>
-
 </body>
 </html>
