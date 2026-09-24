@@ -108,6 +108,11 @@ section{padding:30px 0 0}
 .pc-cta-civic{background:linear-gradient(135deg,#6fa8ff,#1761c8);color:#fff}
 .pc-cta-life{background:linear-gradient(135deg,#d2b4ff,#9157d8);color:#fff}
 .pc-cta:hover{transform:translateY(-2px);opacity:.9}
+.pc-cta-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pc-login{display:inline-flex;align-items:center;padding:12px 18px;border-radius:999px;font-weight:700;font-size:.88rem;border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;transition:all .25s}
+.pc-login:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.pc-login-disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
+.pc-login-disabled:hover{transform:none}
 .pc-expand-hint{font-size:.78rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px}
 
 /* ── MODAL OVERLAY ── */
@@ -116,6 +121,8 @@ section{padding:30px 0 0}
 .modal{width:min(1100px,calc(100% - 28px));margin:28px auto 60px;border-radius:32px;overflow:hidden;position:relative}
 .modal-close{position:fixed;top:20px;right:20px;z-index:300;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;backdrop-filter:blur(8px)}
 .modal-close:hover{background:rgba(255,255,255,.2)}
+.modal-home{position:fixed;top:20px;left:20px;z-index:300;height:44px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.85rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;transition:all .25s;backdrop-filter:blur(8px)}
+.modal-home:hover{background:rgba(255,255,255,.2)}
 
 /* Modal Hero */
 .m-hero{padding:48px 44px 36px;color:#f4efe4;position:relative;overflow:hidden}
@@ -372,7 +379,10 @@ footer a:hover{color:var(--ink)}
           </ul>
         </div>
         <div class="pc-cta-row">
-          <span class="pc-cta pc-cta-apts">Explore MyAptsOS →</span>
+          <div class="pc-cta-group">
+            <span class="pc-cta pc-cta-apts">Explore MyAptsOS →</span>
+            <a class="pc-login" href="https://myaptsos.myosbharat.com/login" onclick="event.stopPropagation()">Login</a>
+          </div>
           <span class="pc-expand-hint">Click to see full details ↗</span>
         </div>
       </div>
@@ -392,7 +402,9 @@ footer a:hover{color:var(--ink)}
           </ul>
         </div>
         <div class="pc-cta-row">
-          <span class="pc-cta pc-cta-civic">Explore MyCivicOS →</span>
+          <div class="pc-cta-group">
+            <span class="pc-cta pc-cta-civic">Explore MyCivicOS →</span>
+          </div>
           <span class="pc-expand-hint">Click to see full details ↗</span>
         </div>
       </div>
@@ -412,7 +424,10 @@ footer a:hover{color:var(--ink)}
           </ul>
         </div>
         <div class="pc-cta-row">
-          <span class="pc-cta pc-cta-life">Explore MyLifeOS →</span>
+          <div class="pc-cta-group">
+            <span class="pc-cta pc-cta-life">Explore MyLifeOS →</span>
+            <span class="pc-login pc-login-disabled" aria-disabled="true">Coming Soon</span>
+          </div>
           <span class="pc-expand-hint">Click to see full details ↗</span>
         </div>
       </div>
@@ -542,6 +557,7 @@ footer a:hover{color:var(--ink)}
      MODAL: MyAptsOS
 ════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-apts">
+  <a class="modal-home" href="https://www.myosbharat.com/">← Back to Home</a>
   <button class="modal-close" onclick="closeModal('apts')">✕</button>
   <div class="modal">
     <div class="m-hero m-hero-apts">
@@ -647,6 +663,7 @@ footer a:hover{color:var(--ink)}
      MODAL: MyCivicOS
 ════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-civic">
+  <a class="modal-home" href="https://www.myosbharat.com/">← Back to Home</a>
   <button class="modal-close" onclick="closeModal('civic')">✕</button>
   <div class="modal">
     <div class="m-hero m-hero-civic">
@@ -772,6 +789,7 @@ footer a:hover{color:var(--ink)}
      MODAL: MyLifeOS
 ════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-life">
+  <a class="modal-home" href="https://www.myosbharat.com/">← Back to Home</a>
   <button class="modal-close" onclick="closeModal('life')">✕</button>
   <div class="modal">
     <div class="m-hero m-hero-life">
