@@ -246,9 +246,14 @@ section{padding:30px 0 0}
 .cta-list{list-style:none;display:grid;gap:10px;color:rgba(247,240,228,.82);font-size:.94rem}
 .cta-list li{display:flex;gap:10px}
 .cta-form{margin-top:16px;display:grid;gap:10px}
-.cta-form input{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-family:'Manrope',sans-serif;font-size:.9rem;outline:none}
-.cta-form input::placeholder{color:rgba(255,255,255,.4)}
-.cta-form input:focus{border-color:var(--gold)}
+.cta-form input,.cta-form textarea{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-family:'Manrope',sans-serif;font-size:.9rem;outline:none}
+.cta-form textarea{resize:vertical;min-height:96px}
+.cta-form input::placeholder,.cta-form textarea::placeholder{color:rgba(255,255,255,.4)}
+.cta-form input:focus,.cta-form textarea:focus{border-color:var(--gold)}
+.cta-form button:disabled,.cta-form button:disabled:hover{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+.cta-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cta-error{display:none;padding:12px 14px;border-radius:12px;background:rgba(230,57,70,.14);border:1px solid rgba(230,57,70,.35);color:#f4b4ba;font-size:.88rem}
+.cta-error a{color:#fff;text-decoration:underline}
 .cta-form button{padding:13px;border-radius:12px;background:linear-gradient(135deg,#f3c66a,#e2a53a);color:#173120;font-family:'Manrope',sans-serif;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .25s}
 .cta-form button:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(226,165,58,.28)}
 .cta-success{display:none;padding:14px;border-radius:12px;background:rgba(82,183,136,.15);border:1px solid rgba(82,183,136,.3);color:#a8dfc0;font-size:.92rem;text-align:center}
@@ -528,13 +533,18 @@ footer a:hover{color:var(--ink)}
     </div>
     <div class="cta-box">
       <strong>Send us a message</strong>
-      <div class="cta-form" id="ctaForm">
-        <input type="text" placeholder="Your name" />
-        <input type="text" placeholder="Organisation / Society / Ward" />
-        <input type="email" placeholder="Email address" />
-        <input type="tel" placeholder="WhatsApp number" />
-        <button onclick="submitCTA()">Send Message →</button>
-      </div>
+      <form class="cta-form" id="ctaForm" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="subject" value="New enquiry from myosbharat.com" />
+        <p class="cta-hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <input type="text" name="name" placeholder="Your name" aria-label="Your name" required maxlength="100" autocomplete="name" />
+        <input type="text" name="organisation" placeholder="Organisation / Society / Ward" aria-label="Organisation / Society / Ward" maxlength="150" autocomplete="organization" />
+        <input type="email" name="email" placeholder="Email address" aria-label="Email address" required maxlength="150" autocomplete="email" />
+        <input type="tel" name="whatsapp" placeholder="WhatsApp number" aria-label="WhatsApp number" maxlength="20" autocomplete="tel" />
+        <textarea name="message" placeholder="Your message" aria-label="Your message" required maxlength="2000" rows="4"></textarea>
+        <div class="cta-error" id="ctaError" role="alert"></div>
+        <button type="submit" id="ctaSubmit">Send Message →</button>
+      </form>
       <div class="cta-success" id="ctaSuccess">✅ Thanks! We'll respond within 24 hours.</div>
     </div>
   </div>
@@ -936,11 +946,42 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.q
 const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }), { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-// CTA form
-function submitCTA() {
-  document.getElementById('ctaForm').style.display = 'none';
-  document.getElementById('ctaSuccess').style.display = 'block';
+// CTA form — submits to Netlify Forms; success is shown only after Netlify accepts the submission
+const ctaForm = document.getElementById('ctaForm');
+const ctaError = document.getElementById('ctaError');
+const ctaSubmit = document.getElementById('ctaSubmit');
+const CTA_FAIL = 'Sorry, we couldn\'t send your message. Please try again or email us directly at <a href="mailto:myos@myosbharat.com">myos@myosbharat.com</a>.';
+function showCTAError(html) { ctaError.innerHTML = html; ctaError.style.display = 'block'; }
+function validateCTA(f) {
+  const el = f.elements, name = el.name.value.trim(), email = el.email.value.trim(), wa = el.whatsapp.value.trim(), msg = el.message.value.trim();
+  if (!name) return ['name', 'Please enter your name.'];
+  if (!email) return ['email', 'Please enter your email address.'];
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return ['email', 'Please enter a valid email address.'];
+  if (wa && !/^\+?[\d\s-]{7,20}$/.test(wa)) return ['whatsapp', 'Please enter a valid WhatsApp number, or leave it empty.'];
+  if (!msg) return ['message', 'Please enter a message.'];
+  return null;
 }
+ctaForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  ctaError.style.display = 'none';
+  const invalid = validateCTA(ctaForm);
+  if (invalid) { showCTAError(invalid[1]); ctaForm.elements[invalid[0]].focus(); return; }
+  ctaSubmit.disabled = true;
+  ctaSubmit.textContent = 'Sending…';
+  try {
+    const data = new URLSearchParams();
+    for (const [k, v] of new FormData(ctaForm)) data.append(k, typeof v === 'string' ? v.trim() : v);
+    const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    ctaForm.style.display = 'none';
+    document.getElementById('ctaSuccess').style.display = 'block';
+  } catch (err) {
+    if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) console.error('Contact form submission failed:', err);
+    showCTAError(CTA_FAIL);
+    ctaSubmit.disabled = false;
+    ctaSubmit.textContent = 'Send Message →';
+  }
+});
 </script>
 </body>
 </html>
